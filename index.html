@@ -20,7 +20,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 #master-timer{font-size:40px;font-weight:900;font-variant-numeric:tabular-nums;text-shadow:0 0 30px rgba(255,255,255,.12)}
 #top-controls{display:flex;gap:6px}
 
-.btn{padding:8px 14px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.btn{padding:8px 14px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent}
 .btn-start{background:var(--gn);border-color:var(--gn);color:#000;font-size:14px;padding:8px 20px}
 .btn-start.running{background:var(--rd);border-color:var(--rd);color:#fff}
 
@@ -42,7 +42,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 #metronome-label{font-size:11px;color:var(--txd)}
 #cpr-controls{display:flex;gap:4px;margin-top:6px}
 
-.btn-s{flex:1;padding:6px 4px;border:1px solid var(--bd);border-radius:6px;background:var(--sf2);color:var(--tx);font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;text-align:center;-webkit-tap-highlight-color:transparent}
+.btn-s{flex:1;padding:6px 4px;border:1px solid var(--bd);border-radius:6px;background:var(--sf2);color:var(--tx);font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;text-align:center;white-space:nowrap;-webkit-tap-highlight-color:transparent}
 .btn-s.active{background:var(--rd);border-color:var(--rd);color:#fff}
 
 #airway-panel{border-left:3px solid var(--ac)}
@@ -80,9 +80,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 .drug-dose{font-size:10px;color:var(--txd)}
 .drug-timer{font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;min-width:44px;text-align:right}
 .drug-timer.due{color:var(--rd);animation:pulse .8s ease-in-out infinite alternate}
-.drug-give{padding:4px 10px;border:1px solid var(--gn);border-radius:6px;background:transparent;color:var(--gn);font-family:inherit;font-size:10px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.drug-give{padding:4px 10px;border:1px solid var(--gn);border-radius:6px;background:transparent;color:var(--gn);font-family:inherit;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent}
 .drug-give:active{background:var(--gn);color:#000}
-#ht-btn{margin-top:auto;padding:6px 8px;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.2);border-radius:6px;font-size:11px;color:var(--yw);font-weight:600;cursor:pointer;text-align:center;-webkit-tap-highlight-color:transparent}
+#ht-btn{margin-top:auto;padding:6px 8px;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.2);border-radius:6px;font-size:11px;color:var(--yw);font-weight:600;cursor:pointer;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-tap-highlight-color:transparent}
 
 #epi-guide{padding:5px 8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:6px;font-size:11px;font-weight:600;color:var(--rd);margin-bottom:4px;display:none}
 #epi-guide.show{display:block}
