@@ -319,15 +319,15 @@ if(rem<=0){document.getElementById('cpr-cycle-timer').textContent='0:00';let isR
 if(epiT!==null){let d=e-epiT;document.getElementById('epi-t').textContent=fT(d);document.getElementById('epi-t').className='drug-timer'+(d>=180000?' due':'')}
 }
 
-function startCode(){on=true;t0=Date.now();po=0;paused=false;startTime=new Date();document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);cs=0;iAudio();addLog('🚨 CODE START','alert');addLog('CPR Start — Cycle 1','cpr')}
+function startCode(){on=true;t0=Date.now();po=0;paused=false;startTime=new Date();document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);cs=0;iAudio();addLog('🚨 ACLS Start','alert');addLog('CPR Start — Cycle 1','cpr')}
 function togglePause(){if(!on)return;let b=document.getElementById('pause-btn');if(paused){paused=false;t0=Date.now();b.textContent='⏸';b.classList.remove('running');addLog('▶️ Resume','alert')}else{paused=true;po=gE();b.textContent='▶';b.classList.add('running');addLog('⏸ Pause','alert')}}
 function endCode(){if(!confirm('End ACLS session?'))return;addLog('🏁 CODE END — 총 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
 
 function rhythmCheckSwap(){let isRC=cyc%2===0;cyc++;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='Next '+(cyc%2===0?'Rhythm Check + ':'')+'Swap';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');if(isRC){addLog('⏸ Rhythm Check — Cycle '+cyc,'rhythm');addLog('🔄 Swap — Cycle '+cyc,'cpr')}else{addLog('🔄 Swap — Cycle '+cyc,'cpr')}btn.textContent=cyc%2===0?'⏸ Rhythm Check + Swap':'🔄 Swap'}
 
 function toggleMetro(){metOn?stopM():startM()}
-function startM(){metOn=true;document.getElementById('metro-btn').classList.add('active');metI=setInterval(()=>{if(!paused){click();let d=document.getElementById('metronome-dot');d.classList.add('beat');setTimeout(()=>d.classList.remove('beat'),80)}},60000/110)}
-function stopM(){metOn=false;document.getElementById('metro-btn').classList.remove('active');clearInterval(metI)}
+function startM(){if(!actx)iAudio();metOn=true;document.getElementById('metro-btn').classList.add('active');let interval=60/110,nextT=actx.currentTime;function sched(){while(nextT<actx.currentTime+0.1){let o=actx.createOscillator(),g=actx.createGain();o.connect(g);g.connect(actx.destination);o.frequency.value=800;g.gain.value=0.12;o.start(nextT);g.gain.exponentialRampToValueAtTime(0.001,nextT+0.06);o.stop(nextT+0.06);nextT+=interval}if(metOn)metI=setTimeout(sched,25)}sched();setInterval(()=>{if(metOn&&!paused){let d=document.getElementById('metronome-dot');d.classList.add('beat');setTimeout(()=>d.classList.remove('beat'),80)}},60000/110)}
+function stopM(){metOn=false;document.getElementById('metro-btn').classList.remove('active');clearTimeout(metI)}
 
 function setAW(t,btn){document.querySelectorAll('.aw-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');let s=document.getElementById('airway-status'),r=document.getElementById('airway-ratio'),tip=document.getElementById('airway-tip'),bg=document.getElementById('aw-badge');
 if(t==='bvm'){bg.textContent='BVM';s.textContent='30 : 2';r.textContent='30 compressions : 2 ventilations';tip.textContent='💡 30:2 ratio. Avoid hyperventilation. Confirm chest rise.';addLog('Airway: BVM (30:2)','airway')}

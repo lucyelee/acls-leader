@@ -1,5 +1,5 @@
-const CACHE = 'acls-v3';
-const FILES = ['./', './index.html', './icon.png', './manifest.json'];
+const CACHE = 'acls-v4';
+const FILES = ['./', './index.html', './en.html', './icon.png', './manifest.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));

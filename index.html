@@ -319,15 +319,15 @@ if(rem<=0){document.getElementById('cpr-cycle-timer').textContent='0:00';let isR
 if(epiT!==null){let d=e-epiT;document.getElementById('epi-t').textContent=fT(d);document.getElementById('epi-t').className='drug-timer'+(d>=180000?' due':'')}
 }
 
-function startCode(){on=true;t0=Date.now();po=0;paused=false;startTime=new Date();document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);cs=0;iAudio();addLog('🚨 CODE START','alert');addLog('CPR 시작 — Cycle 1','cpr')}
+function startCode(){on=true;t0=Date.now();po=0;paused=false;startTime=new Date();document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);cs=0;iAudio();addLog('🚨 ACLS 시작','alert');addLog('CPR 시작 — Cycle 1','cpr')}
 function togglePause(){if(!on)return;let b=document.getElementById('pause-btn');if(paused){paused=false;t0=Date.now();b.textContent='⏸';b.classList.remove('running');addLog('▶️ 재개','alert')}else{paused=true;po=gE();b.textContent='▶';b.classList.add('running');addLog('⏸ 일시정지','alert')}}
 function endCode(){if(!confirm('ACLS 세션을 종료하시겠습니까?'))return;addLog('🏁 CODE END — 총 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
 
 function rhythmCheckSwap(){let isRC=cyc%2===0;cyc++;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='다음 '+(cyc%2===0?'리듬체크+':'')+'교대까지';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');if(isRC){addLog('⏸ 리듬체크 — Cycle '+cyc,'rhythm');addLog('🔄 교대 — Cycle '+cyc,'cpr')}else{addLog('🔄 교대 — Cycle '+cyc,'cpr')}btn.textContent=cyc%2===0?'⏸ 리듬체크 + 교대':'🔄 교대'}
 
 function toggleMetro(){metOn?stopM():startM()}
-function startM(){metOn=true;document.getElementById('metro-btn').classList.add('active');metI=setInterval(()=>{if(!paused){click();let d=document.getElementById('metronome-dot');d.classList.add('beat');setTimeout(()=>d.classList.remove('beat'),80)}},60000/110)}
-function stopM(){metOn=false;document.getElementById('metro-btn').classList.remove('active');clearInterval(metI)}
+function startM(){if(!actx)iAudio();metOn=true;document.getElementById('metro-btn').classList.add('active');let interval=60/110,nextT=actx.currentTime;function sched(){while(nextT<actx.currentTime+0.1){let o=actx.createOscillator(),g=actx.createGain();o.connect(g);g.connect(actx.destination);o.frequency.value=800;g.gain.value=0.12;o.start(nextT);g.gain.exponentialRampToValueAtTime(0.001,nextT+0.06);o.stop(nextT+0.06);nextT+=interval}if(metOn)metI=setTimeout(sched,25)}sched();setInterval(()=>{if(metOn&&!paused){let d=document.getElementById('metronome-dot');d.classList.add('beat');setTimeout(()=>d.classList.remove('beat'),80)}},60000/110)}
+function stopM(){metOn=false;document.getElementById('metro-btn').classList.remove('active');clearTimeout(metI)}
 
 function setAW(t,btn){document.querySelectorAll('.aw-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');let s=document.getElementById('airway-status'),r=document.getElementById('airway-ratio'),tip=document.getElementById('airway-tip'),bg=document.getElementById('aw-badge');
 if(t==='bvm'){bg.textContent='BVM';s.textContent='30 : 2';r.textContent='압박 30회 : 환기 2회';tip.textContent='💡 30:2 비율. 과환기 주의. 가슴 상승 확인.';addLog('Airway: BVM (30:2)','airway')}
@@ -375,7 +375,7 @@ function tHT(el){el.classList.toggle('checked');if(el.classList.contains('checke
 
 function addLog(msg,type){let t=fT(gE());logs.push({t,msg,type,ts:new Date().toISOString()});let c=document.getElementById('log-entries'),d=document.createElement('div');d.className='log-entry '+type;d.innerHTML='<span class="log-time">'+t+'</span><span class="log-msg">'+msg+'</span>';c.prepend(d)}
 
-function exportLog(){let st=startTime?startTime.toLocaleString('ko-KR'):'N/A';let t='2025 ACLS Code Log\n시작: '+st+'\n내보내기: '+new Date().toLocaleString('ko-KR')+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\n총시간: '+fT(gE())+'\n제세동: '+sc+'회\nEpi: '+ec+'회\nAmio: '+ac+'회\n';let b=new Blob(['\uFEFF'+t],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='acls_'+new Date().toISOString().slice(0,10)+'.txt';a.click()}
+function exportLog(){let st=startTime?startTime.toLocaleString('ko-KR'):'N/A';let t='2025 ACLS Code Log\n시작: '+st+'\n내보내기: '+new Date().toLocaleString('ko-KR')+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\n총시간: '+fT(gE())+'\n제세동: '+sc+'회\nEpi: '+ec+'회\nAmio: '+ac+'회\n';if(navigator.share){navigator.share({title:'ACLS Log',text:t}).catch(()=>{})}else{let b=new Blob(['\uFEFF'+t],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='acls_'+new Date().toISOString().slice(0,10)+'.txt';a.click()}}
 
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'))}
 </script>
