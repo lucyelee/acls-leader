@@ -137,6 +137,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <p>Team Leader Dashboard</p>
 <button id="begin-btn" onclick="startCode()">START</button>
 <p style="font-size:9px;color:var(--txd);margin-top:20px;line-height:1.6">Based on AHA ACLS 2025 Guidelines<br>For education and simulation purposes only</p>
+<a href="index.html" style="font-size:10px;color:var(--ac);margin-top:8px;display:inline-block">한국어 →</a>
 </div>
 
 <div id="top-bar">
@@ -196,8 +197,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <div class="panel" id="drugs-panel">
 <div class="panel-header"><span class="panel-title">DRUGS</span><span class="panel-badge" style="background:var(--gn);color:#000">Meds</span></div>
 <div id="epi-guide"></div>
-<div class="drug-row"><div><div class="drug-name">Epinephrine</div><div class="drug-dose">1mg IV q3-5분</div></div><div class="drug-timer" id="epi-t">—</div><button class="drug-give" onclick="giveEpi()">투여</button></div>
-<div class="drug-row"><div><div class="drug-name">Amiodarone</div><div class="drug-dose" id="amio-lbl">300mg → 150mg</div></div><div class="drug-timer" id="amio-t">—</div><button class="drug-give" onclick="giveAmio()">투여</button></div>
+<div class="drug-row"><div><div class="drug-name">Epinephrine</div><div class="drug-dose">1mg IV q3-5min</div></div><div class="drug-timer" id="epi-t">—</div><button class="drug-give" onclick="giveEpi()">Give</button></div>
+<div class="drug-row"><div><div class="drug-name">Amiodarone</div><div class="drug-dose" id="amio-lbl">300mg → 150mg</div></div><div class="drug-timer" id="amio-t">—</div><button class="drug-give" onclick="giveAmio()">Give</button></div>
 <div class="drug-row"><div><div class="drug-name">Other</div><div class="drug-dose">Atropine 등</div></div><div class="drug-timer">—</div><button class="drug-give" onclick="giveOther()">Log</button></div>
 <div id="ht-btn" onclick="openHT()">⚠️ H5 T4 Reversible Causes Checklist</div>
 </div>
@@ -314,7 +315,7 @@ document.getElementById('master-timer').textContent=fT(e);
 let cr=e-cs,rem=Math.max(0,60000-cr);
 document.getElementById('cpr-cycle-timer').textContent=fT(rem);
 if(rem<=10000&&rem>0&&!sa){sa=true;document.getElementById('cpr-swap-alert').style.display='block';alert2();addLog('⚠️ 10s '+(cyc%2===0?'Rhythm Check+':'')+'Swap','cpr')}
-if(rem<=0){document.getElementById('cpr-cycle-timer').textContent='0:00';let isRC=cyc%2===0;document.getElementById('cpr-cycle-label').textContent=isRC?'⏰ Rhythm Check+SWAP!':'⏰ 교대!';document.getElementById('cpr-swap-alert').style.display='block';document.getElementById('cpr-swap-alert').textContent=isRC?'🔄 리듬체크+교대!':'🔄 교대!'}
+if(rem<=0){document.getElementById('cpr-cycle-timer').textContent='0:00';let isRC=cyc%2===0;document.getElementById('cpr-cycle-label').textContent=isRC?'⏰ Rhythm Check + SWAP!':'⏰ SWAP!';document.getElementById('cpr-swap-alert').style.display='block';document.getElementById('cpr-swap-alert').textContent=isRC?'🔄 Rhythm Check + Swap!':'🔄 SWAP!'}
 if(epiT!==null){let d=e-epiT;document.getElementById('epi-t').textContent=fT(d);document.getElementById('epi-t').className='drug-timer'+(d>=180000?' due':'')}
 }
 
@@ -322,7 +323,7 @@ function startCode(){on=true;t0=Date.now();po=0;paused=false;startTime=new Date(
 function togglePause(){if(!on)return;let b=document.getElementById('pause-btn');if(paused){paused=false;t0=Date.now();b.textContent='⏸';b.classList.remove('running');addLog('▶️ Resume','alert')}else{paused=true;po=gE();b.textContent='▶';b.classList.add('running');addLog('⏸ Pause','alert')}}
 function endCode(){if(!confirm('End ACLS session?'))return;addLog('🏁 CODE END — 총 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
 
-function rhythmCheckSwap(){let isRC=cyc%2===0;cyc++;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='다음 '+(cyc%2===0?'Rhythm Check+':'')+'교대까지';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');if(isRC){addLog('⏸ Rhythm Check — Cycle '+cyc,'rhythm');addLog('🔄 Swap — Cycle '+cyc,'cpr')}else{addLog('🔄 교대 — Cycle '+cyc,'cpr')}btn.textContent=cyc%2===0?'⏸ Rhythm Check + Swap':'🔄 Swap'}
+function rhythmCheckSwap(){let isRC=cyc%2===0;cyc++;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='Next '+(cyc%2===0?'Rhythm Check + ':'')+'Swap';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');if(isRC){addLog('⏸ Rhythm Check — Cycle '+cyc,'rhythm');addLog('🔄 Swap — Cycle '+cyc,'cpr')}else{addLog('🔄 Swap — Cycle '+cyc,'cpr')}btn.textContent=cyc%2===0?'⏸ Rhythm Check + Swap':'🔄 Swap'}
 
 function toggleMetro(){metOn?stopM():startM()}
 function startM(){metOn=true;document.getElementById('metro-btn').classList.add('active');metI=setInterval(()=>{if(!paused){click();let d=document.getElementById('metronome-dot');d.classList.add('beat');setTimeout(()=>d.classList.remove('beat'),80)}},60000/110)}
@@ -333,14 +334,14 @@ if(t==='bvm'){bg.textContent='BVM';s.textContent='30 : 2';r.textContent='30 comp
 else if(t==='lma'){bg.textContent='LMA';s.textContent='Continuous CPR';r.textContent='Ventilate every 6 seconds';tip.textContent='💡 LMA inserted. Continuous CPR + ventilate q6s.';addLog('Airway: LMA → Continuous CPR','airway')}
 else{bg.textContent='ETT';s.textContent='Continuous CPR';r.textContent='Ventilate every 6 seconds';tip.textContent='💡 ETT placed. Continuous CPR + check ETCO2.';addLog('Airway: ETT placed','airway')}}
 
-const RD={vf:{n:'VF',sh:true},pvt:{n:'Pulseless VT',sh:true},pea:{n:'PEA',sh:false},asystole:{n:'Asystole',sh:false},rosc:{n:'ROSC ✓',sh:false},other:{n:'기타',sh:false}};
+const RD={vf:{n:'VF',sh:true},pvt:{n:'Pulseless VT',sh:true},pea:{n:'PEA',sh:false},asystole:{n:'Asystole',sh:false},rosc:{n:'ROSC ✓',sh:false},other:{n:'Other',sh:false}};
 let curRhythm=null;
 function setRH(t,btn){document.querySelectorAll('.rh-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');let d=RD[t];curRhythm=t;document.getElementById('rh-badge').textContent=d.sh?'SHOCKABLE':'NON-SHOCK';document.getElementById('rh-badge').style.background=d.sh?'var(--rd)':'var(--txd)';addLog('Rhythm: '+d.n,'rhythm');updateEpiGuide();updateAmioGuide();if(t==='rosc'){addLog('🎉 ROSC!','alert');stopM();openROSC()}}
-function updateEpiGuide(){let g=document.getElementById('epi-guide');if(!curRhythm||curRhythm==='rosc'||curRhythm==='other'){g.classList.remove('show');return}g.classList.add('show');g.style.animation='none';let sh=RD[curRhythm].sh;let sinceEpi=epiT!==null?gE()-epiT:null;let epiDue=sinceEpi!==null&&sinceEpi>=180000;if(sh){if(sc<2){g.className='show';g.id='epi-guide';g.textContent='⚡ Shockable: Epi는 2번째 shock 후 투여'}else if(epiT===null){g.className='show';g.id='epi-guide';g.textContent='💉 Epi 투여 가능 — 지금 투여';g.style.animation='pulse .8s ease-in-out infinite alternate'}else if(epiDue){g.className='show';g.id='epi-guide';g.textContent='💉 Epi 재투여 시점 ('+Math.floor(sinceEpi/60000)+'분 경과)';g.style.animation='pulse .8s ease-in-out infinite alternate'}else{g.className='show ok';g.id='epi-guide';g.textContent='✅ Epi 투여됨 — 다음 투여 '+(3-Math.floor(sinceEpi/60000))+'분 후'}}else{if(epiT===null){g.className='show';g.id='epi-guide';g.textContent='🚨 Non-shockable: Epi immediately 투여!';g.style.animation='pulse .8s ease-in-out infinite alternate'}else if(epiDue){g.className='show';g.id='epi-guide';g.textContent='💉 Epi 재투여 시점 ('+Math.floor(sinceEpi/60000)+'분 경과)';g.style.animation='pulse .8s ease-in-out infinite alternate'}else{g.className='show ok';g.id='epi-guide';g.textContent='✅ Epi 투여됨 (#'+ec+') — 다음 투여 '+(3-Math.floor(sinceEpi/60000))+'분 후'}}}
+function updateEpiGuide(){let g=document.getElementById('epi-guide');if(!curRhythm||curRhythm==='rosc'||curRhythm==='other'){g.classList.remove('show');return}g.classList.add('show');g.style.animation='none';let sh=RD[curRhythm].sh;let sinceEpi=epiT!==null?gE()-epiT:null;let epiDue=sinceEpi!==null&&sinceEpi>=180000;if(sh){if(sc<2){g.className='show';g.id='epi-guide';g.textContent='⚡ Shockable: Epi after 2nd shock'}else if(epiT===null){g.className='show';g.id='epi-guide';g.textContent='💉 Epi available — give now';g.style.animation='pulse .8s ease-in-out infinite alternate'}else if(epiDue){g.className='show';g.id='epi-guide';g.textContent='💉 Epi re-dose due ('+Math.floor(sinceEpi/60000)+'min elapsed)';g.style.animation='pulse .8s ease-in-out infinite alternate'}else{g.className='show ok';g.id='epi-guide';g.textContent='✅ Epi given — next in '+(3-Math.floor(sinceEpi/60000))+'min'}}else{if(epiT===null){g.className='show';g.id='epi-guide';g.textContent='🚨 Non-shockable: Give Epi NOW!';g.style.animation='pulse .8s ease-in-out infinite alternate'}else if(epiDue){g.className='show';g.id='epi-guide';g.textContent='💉 Epi re-dose due ('+Math.floor(sinceEpi/60000)+'min elapsed)';g.style.animation='pulse .8s ease-in-out infinite alternate'}else{g.className='show ok';g.id='epi-guide';g.textContent='✅ Epi given (#'+ec+') — next in '+(3-Math.floor(sinceEpi/60000))+'min'}}}
 
 function openROSC(){document.getElementById('rosc-modal').classList.add('show')}
 function closeROSC(){document.getElementById('rosc-modal').classList.remove('show')}
-function tROSC(el){el.classList.toggle('checked');if(el.classList.contains('checked'))addLog('✅ [ROSC] '+el.dataset.c+' 'Checked','alert')}
+function tROSC(el){el.classList.toggle('checked');if(el.classList.contains('checked'))addLog('✅ [ROSC] '+el.dataset.c+' checked','alert')}
 function openDSED(){document.getElementById('dsed-modal').classList.add('show')}
 function closeDSED(){document.getElementById('dsed-modal').classList.remove('show')}
 
@@ -355,10 +356,10 @@ function giveEpi(){ec++;epiT=gE();addLog('💉 Epi 1mg IV (#'+ec+')','drug');upd
 function giveAmio(){ac++;let dose=ac===1?'300mg':'150mg';addLog('💉 Amio '+dose+' IV (#'+ac+')','drug');updateAmioGuide()}
 
 function updateAmioGuide(){let l=document.getElementById('amio-lbl');
-if(ac>=2){l.textContent='✅ 최대용량 완료 (300+150mg)';return}
-if(!curRhythm||!RD[curRhythm].sh){l.textContent=ac===0?'300mg → 150mg (Shockable용)':'✅ 300mg 투여됨';return}
-if(ac===0){if(sc<3){l.textContent='300mg — 3rd shock 후 투여'}else{l.textContent='💉 300mg 투여 가능!'}}
-else if(ac===1){if(sc<5){l.textContent='150mg — 5th shock 후 투여'}else{l.textContent='💉 150mg 투여 가능!'}}}
+if(ac>=2){l.textContent='✅ Max dose given (300+150mg)';return}
+if(!curRhythm||!RD[curRhythm].sh){l.textContent=ac===0?'300mg → 150mg (Shockable only)':'✅ 300mg given';return}
+if(ac===0){if(sc<3){l.textContent='300mg — after 3rd shock'}else{l.textContent='💉 300mg available!'}}
+else if(ac===1){if(sc<5){l.textContent='150mg — after 5th shock'}else{l.textContent='💉 150mg available!'}}}
 function giveOther(){openInput('💉 Other medication','Drug/dose...',function(d){addLog('💉 '+d,'drug')})}
 
 let inputCb=null;
@@ -366,15 +367,15 @@ function openInput(label,ph,cb){inputCb=cb;document.getElementById('input-label'
 function closeInput(){document.getElementById('input-modal').classList.remove('show');inputCb=null}
 function submitInput(){let d=document.getElementById('input-field').value.trim();let cb=inputCb;closeInput();if(d&&cb)cb(d)}
 
-function openMemo(){openInput('📝 메모','Enter memo...',function(d){addLog('📝 '+d,'alert')})}
+function openMemo(){openInput('📝 Memo','Enter memo...',function(d){addLog('📝 '+d,'alert')})}
 
 function openHT(){document.getElementById('ht-modal').classList.add('show')}
 function closeHT(){document.getElementById('ht-modal').classList.remove('show')}
-function tHT(el){el.classList.toggle('checked');if(el.classList.contains('checked'))addLog('✅ '+el.dataset.c+' 'Checked','drug')}
+function tHT(el){el.classList.toggle('checked');if(el.classList.contains('checked'))addLog('✅ '+el.dataset.c+' checked','drug')}
 
 function addLog(msg,type){let t=fT(gE());logs.push({t,msg,type,ts:new Date().toISOString()});let c=document.getElementById('log-entries'),d=document.createElement('div');d.className='log-entry '+type;d.innerHTML='<span class="log-time">'+t+'</span><span class="log-msg">'+msg+'</span>';c.prepend(d)}
 
-function exportLog(){let st=startTime?startTime.toLocaleString('ko-KR'):'N/A';let t='2025 ACLS Code Log\nStart: '+st+'\nExport: '+new Date().toLocaleString('ko-KR')+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\nDuration: '+fT(gE())+'\n제세동: '+sc+'x\nEpi: '+ec+'x\nAmio: '+ac+'x\n';let b=new Blob(['\uFEFF'+t],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='acls_'+new Date().toISOString().slice(0,10)+'.txt';a.click()}
+function exportLog(){let st=startTime?startTime.toLocaleString('ko-KR'):'N/A';let t='2025 ACLS Code Log\nStart: '+st+'\nExport: '+new Date().toLocaleString('ko-KR')+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\nDuration: '+fT(gE())+'\nDefib: '+sc+'x\nEpi: '+ec+'x\nAmio: '+ac+'x\n';let b=new Blob(['\uFEFF'+t],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='acls_'+new Date().toISOString().slice(0,10)+'.txt';a.click()}
 
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'))}
 </script>
