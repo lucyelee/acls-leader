@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -134,19 +134,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 
 <div id="not-started">
 <h2>2025 ACLS</h2>
-<p>팀 리더 대시보드</p>
-<button id="begin-btn" onclick="startCode()">시작</button>
-<p style="font-size:9px;color:var(--txd);margin-top:20px;line-height:1.6">Based on AHA ACLS 2025 Guidelines<br>교육 및 시뮬레이션 목적으로 제작되었습니다</p>
-<a href="en.html" style="font-size:10px;color:var(--ac);margin-top:8px;display:inline-block">English →</a>
+<p>Team Leader Dashboard</p>
+<button id="begin-btn" onclick="startCode()">START</button>
+<p style="font-size:9px;color:var(--txd);margin-top:20px;line-height:1.6">Based on AHA ACLS 2025 Guidelines<br>For education and simulation purposes only</p>
 </div>
 
 <div id="top-bar">
 <h1>2025 ACLS</h1>
 <div id="master-timer">00:00</div>
 <div id="top-controls">
-<button class="btn" onclick="openMemo()">메모</button>
+<button class="btn" onclick="openMemo()">Memo</button>
 <button class="btn btn-start" id="pause-btn" onclick="togglePause()">⏸</button>
-<button class="btn" onclick="endCode()">종료</button>
+<button class="btn" onclick="endCode()">End</button>
 </div>
 </div>
 
@@ -154,26 +153,26 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 
 <div class="panel" id="cpr-panel">
 <div class="panel-header"><span class="panel-title">CPR</span><span class="panel-badge" id="cpr-badge" style="background:var(--rd);color:#fff">Cycle 1</span></div>
-<div id="cpr-swap-alert">🔄 교대!</div>
+<div id="cpr-swap-alert">🔄 SWAP!</div>
 <div id="cpr-cycle-timer">1:00</div>
-<div id="cpr-cycle-label">다음 리듬체크까지</div>
+<div id="cpr-cycle-label">Next rhythm check</div>
 <div id="metronome-indicator"><div id="metronome-dot"></div><span id="metronome-label">110 BPM</span></div>
 <div id="cpr-controls">
-<button class="btn-s" style="background:var(--rd);border-color:var(--rd);color:#fff" onclick="rhythmCheckSwap()">⏸ 리듬체크 + 교대</button>
-<button class="btn-s" id="metro-btn" onclick="toggleMetro()">🔊 메트로놈</button>
+<button class="btn-s" style="background:var(--rd);border-color:var(--rd);color:#fff" onclick="rhythmCheckSwap()">⏸ Rhythm Check + Swap</button>
+<button class="btn-s" id="metro-btn" onclick="toggleMetro()">🔊 Metronome</button>
 </div>
 </div>
 
 <div class="panel" id="airway-panel">
 <div class="panel-header"><span class="panel-title">AIRWAY</span><span class="panel-badge" id="aw-badge" style="background:var(--ac);color:#fff">BVM</span></div>
 <div id="airway-status">30 : 2</div>
-<div id="airway-ratio">압박 30회 : 환기 2회</div>
+<div id="airway-ratio">30 compressions : 2 ventilations</div>
 <div id="airway-buttons">
 <button class="aw-btn active" onclick="setAW('bvm',this)">BVM</button>
 <button class="aw-btn" onclick="setAW('lma',this)">LMA</button>
-<button class="aw-btn" onclick="setAW('ett',this)">삽관</button>
+<button class="aw-btn" onclick="setAW('ett',this)">ETT</button>
 </div>
-<div id="airway-tip">💡 30:2 비율. 과환기 주의. 가슴 상승 확인.</div>
+<div id="airway-tip">💡 30:2 ratio. Avoid hyperventilation. Confirm chest rise.</div>
 </div>
 
 <div class="panel" id="rhythm-panel">
@@ -184,28 +183,28 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <button class="rh-btn ns" onclick="setRH('pea',this)">PEA</button>
 <button class="rh-btn ns" onclick="setRH('asystole',this)">Asystole</button>
 <button class="rh-btn" style="border-left:2px solid var(--gn)" onclick="setRH('rosc',this)">ROSC ✓</button>
-<button class="rh-btn" onclick="setRH('other',this)">기타</button>
+<button class="rh-btn" onclick="setRH('other',this)">Other</button>
 </div>
 <div id="shock-row">
-<span style="color:var(--txd);font-size:10px;font-weight:600">제세동</span>
-<span id="shock-count">0회</span>
+<span style="color:var(--txd);font-size:10px;font-weight:600">Defib</span>
+<span id="shock-count">0</span>
 <button class="btn-s" id="shock-btn" style="flex:0;padding:5px 12px;background:var(--yw);border-color:var(--yw);color:#000" onclick="shock()">⚡ 200J</button>
 </div>
-<div id="refractory-tip" onclick="openDSED()">💡 Refractory VF: 패드 위치 변경 또는 DSED 고려 ▶</div>
+<div id="refractory-tip" onclick="openDSED()">💡 Refractory VF: Consider pad repositioning or DSED ▶</div>
 </div>
 
 <div class="panel" id="drugs-panel">
-<div class="panel-header"><span class="panel-title">DRUGS</span><span class="panel-badge" style="background:var(--gn);color:#000">약물</span></div>
+<div class="panel-header"><span class="panel-title">DRUGS</span><span class="panel-badge" style="background:var(--gn);color:#000">Meds</span></div>
 <div id="epi-guide"></div>
 <div class="drug-row"><div><div class="drug-name">Epinephrine</div><div class="drug-dose">1mg IV q3-5분</div></div><div class="drug-timer" id="epi-t">—</div><button class="drug-give" onclick="giveEpi()">투여</button></div>
 <div class="drug-row"><div><div class="drug-name">Amiodarone</div><div class="drug-dose" id="amio-lbl">300mg → 150mg</div></div><div class="drug-timer" id="amio-t">—</div><button class="drug-give" onclick="giveAmio()">투여</button></div>
-<div class="drug-row"><div><div class="drug-name">기타</div><div class="drug-dose">Atropine 등</div></div><div class="drug-timer">—</div><button class="drug-give" onclick="giveOther()">기록</button></div>
-<div id="ht-btn" onclick="openHT()">⚠️ H5 T4 가역적 원인 체크리스트 열기</div>
+<div class="drug-row"><div><div class="drug-name">Other</div><div class="drug-dose">Atropine 등</div></div><div class="drug-timer">—</div><button class="drug-give" onclick="giveOther()">Log</button></div>
+<div id="ht-btn" onclick="openHT()">⚠️ H5 T4 Reversible Causes Checklist</div>
 </div>
 </div>
 
 <div id="log-section">
-<div id="log-header"><span>📋 EVENT LOG</span><button class="btn-s" style="flex:0;padding:3px 10px" onclick="exportLog()">내보내기</button></div>
+<div id="log-header"><span>📋 EVENT LOG</span><button class="btn-s" style="flex:0;padding:3px 10px" onclick="exportLog()">Export</button></div>
 <div id="log-entries"></div>
 </div>
 
@@ -213,29 +212,29 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <div id="memo-box">
 <label id="input-label">📝 메모</label>
 <input id="input-field" type="text" placeholder="" onkeydown="if(event.key==='Enter')submitInput()">
-<div id="memo-btns"><button onclick="submitInput()" class="ok">확인</button><button onclick="closeInput()">취소</button></div>
+<div id="memo-btns"><button onclick="submitInput()" class="ok">OK</button><button onclick="closeInput()">Cancel</button></div>
 </div>
 </div>
 
 <div id="ht-modal" onclick="if(event.target===this)closeHT()">
 <div id="ht-content">
-<h2>H5 T4 가역적 원인</h2>
+<h2>H5 T4 Reversible Causes</h2>
 <h3 style="color:var(--rd)">H's</h3>
 <div class="ht-grid">
-<div class="ht-item" onclick="tHT(this)" data-c="Hypovolemia"><div class="ht-item-name">Hypovolemia</div><div class="ht-item-how">초음파(IVC), 수액/수혈</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="Hypoxia"><div class="ht-item-name">Hypoxia</div><div class="ht-item-how">SpO2, 호흡음, 기도확인</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Hypovolemia"><div class="ht-item-name">Hypovolemia</div><div class="ht-item-how">US (IVC), fluids/blood</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Hypoxia"><div class="ht-item-name">Hypoxia</div><div class="ht-item-how">SpO2, breath sounds, airway</div></div>
 <div class="ht-item" onclick="tHT(this)" data-c="H+ Acidosis"><div class="ht-item-name">H⁺ Acidosis</div><div class="ht-item-how">ABGA (pH, HCO3)</div></div>
 <div class="ht-item" onclick="tHT(this)" data-c="Hypo/HyperK"><div class="ht-item-name">Hypo/HyperK</div><div class="ht-item-how">ABGA(K+), ECG</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="Hypothermia"><div class="ht-item-name">Hypothermia</div><div class="ht-item-how">체온 측정</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Hypothermia"><div class="ht-item-name">Hypothermia</div><div class="ht-item-how">Core temperature</div></div>
 </div>
 <h3 style="color:var(--yw)">T's</h3>
 <div class="ht-grid">
-<div class="ht-item" onclick="tHT(this)" data-c="Tension Pneumothorax"><div class="ht-item-name">Tension Pneumo</div><div class="ht-item-how">청진, 초음파, 바늘감압</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="Tamponade"><div class="ht-item-name">Tamponade</div><div class="ht-item-how">초음파, 심낭천자</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="Toxins"><div class="ht-item-name">Toxins</div><div class="ht-item-how">병력, 동공, 해독제</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Tension Pneumothorax"><div class="ht-item-name">Tension Pneumo</div><div class="ht-item-how">Auscultation, US, needle decompression</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Tamponade"><div class="ht-item-name">Tamponade</div><div class="ht-item-how">US, pericardiocentesis</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Toxins"><div class="ht-item-name">Toxins</div><div class="ht-item-how">History, pupils, antidote</div></div>
 <div class="ht-item" onclick="tHT(this)" data-c="Thrombosis"><div class="ht-item-name">Thrombosis</div><div class="ht-item-how">12-lead ECG, 초음파(RV)</div></div>
 </div>
-<button class="btn" style="width:100%;margin-top:8px" onclick="closeHT()">닫기</button>
+<button class="btn" style="width:100%;margin-top:8px" onclick="closeHT()">Close</button>
 </div>
 </div>
 
@@ -243,54 +242,54 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <div id="rosc-content">
 <h2>✅ ROSC — Post-Cardiac Arrest Care</h2>
 <div class="ht-grid">
-<div class="ht-item" onclick="tROSC(this)" data-c="12-lead ECG"><div class="ht-item-name">12-lead ECG</div><div class="ht-item-how">STEMI → PCI 고려</div></div>
-<div class="ht-item" onclick="tROSC(this)" data-c="SpO2 92-98%"><div class="ht-item-name">SpO2 92-98%</div><div class="ht-item-how">과산소 회피, FiO2 조절</div></div>
-<div class="ht-item" onclick="tROSC(this)" data-c="MAP > 65"><div class="ht-item-name">MAP > 65 mmHg</div><div class="ht-item-how">수액/승압제, SBP>90</div></div>
-<div class="ht-item" onclick="tROSC(this)" data-c="TTM"><div class="ht-item-name">TTM (체온관리)</div><div class="ht-item-how">32-36℃ 목표, 열 방지</div></div>
+<div class="ht-item" onclick="tROSC(this)" data-c="12-lead ECG"><div class="ht-item-name">12-lead ECG</div><div class="ht-item-how">STEMI → Consider PCI</div></div>
+<div class="ht-item" onclick="tROSC(this)" data-c="SpO2 92-98%"><div class="ht-item-name">SpO2 92-98%</div><div class="ht-item-how">Avoid hyperoxia, titrate FiO2</div></div>
+<div class="ht-item" onclick="tROSC(this)" data-c="MAP > 65"><div class="ht-item-name">MAP > 65 mmHg</div><div class="ht-item-how">Fluids/vasopressors, SBP>90</div></div>
+<div class="ht-item" onclick="tROSC(this)" data-c="TTM"><div class="ht-item-name">TTM (TTM)</div><div class="ht-item-how">32-36℃ target, prevent fever</div></div>
 <div class="ht-item" onclick="tROSC(this)" data-c="ABGA"><div class="ht-item-name">ABGA</div><div class="ht-item-how">pH, K+, Lactate 확인</div></div>
-<div class="ht-item" onclick="tROSC(this)" data-c="원인 치료"><div class="ht-item-name">원인 치료</div><div class="ht-item-how">H5T4 기반 근본 치료</div></div>
+<div class="ht-item" onclick="tROSC(this)" data-c="Treat Cause"><div class="ht-item-name">원인 치료</div><div class="ht-item-how">H5T4 based definitive Tx</div></div>
 </div>
-<button class="btn" style="width:100%;margin-top:8px" onclick="closeROSC()">닫기</button>
+<button class="btn" style="width:100%;margin-top:8px" onclick="closeROSC()">Close</button>
 </div>
 </div>
 
 <div id="dsed-modal" onclick="if(event.target===this)closeDSED()">
 <div id="dsed-content">
-<h2>⚡ Refractory VF — 패드 위치 가이드</h2>
+<h2>⚡ Refractory VF — Pad Placement Guide</h2>
 <p style="font-size:10px;color:var(--txd);margin-bottom:14px">DSED = Double Sequential External Defibrillation</p>
 
 <div style="background:var(--sf2);border-radius:8px;padding:12px;margin-bottom:10px">
-<div style="font-size:11px;font-weight:700;color:var(--yw);margin-bottom:8px">① Standard (전-측)</div>
+<div style="font-size:11px;font-weight:700;color:var(--yw);margin-bottom:8px">① Standard (Anterior-Lateral)</div>
 <div style="display:flex;justify-content:center">
-<svg width="160" height="170" viewBox="0 0 160 170"><circle cx="80" cy="26" r="14" fill="none" stroke="#4a5568" stroke-width="1.5"/><line x1="80" y1="40" x2="80" y2="50" stroke="#4a5568" stroke-width="1.5"/><ellipse cx="80" cy="108" rx="44" ry="56" fill="rgba(74,85,104,.06)" stroke="#4a5568" stroke-width="1.5"/><rect x="48" y="60" width="24" height="12" rx="3" fill="#ef4444"/><text x="60" y="70" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">R</text><rect x="118" y="96" width="12" height="24" rx="3" fill="#3b82f6"/><text x="124" y="112" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">L</text><text x="80" y="167" text-anchor="middle" fill="#7a8ba8" font-size="9">전면</text></svg>
+<svg width="160" height="170" viewBox="0 0 160 170"><circle cx="80" cy="26" r="14" fill="none" stroke="#4a5568" stroke-width="1.5"/><line x1="80" y1="40" x2="80" y2="50" stroke="#4a5568" stroke-width="1.5"/><ellipse cx="80" cy="108" rx="44" ry="56" fill="rgba(74,85,104,.06)" stroke="#4a5568" stroke-width="1.5"/><rect x="48" y="60" width="24" height="12" rx="3" fill="#ef4444"/><text x="60" y="70" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">R</text><rect x="118" y="96" width="12" height="24" rx="3" fill="#3b82f6"/><text x="124" y="112" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">L</text><text x="80" y="167" text-anchor="middle" fill="#7a8ba8" font-size="9">Front</text></svg>
 </div>
-<div style="display:flex;justify-content:center;gap:14px;font-size:9px;color:var(--txd);margin-top:4px"><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#ef4444;border-radius:2px;display:inline-block"></span>우측 쇄골 하방</span><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#3b82f6;border-radius:2px;display:inline-block"></span>좌측 액와 중간선</span></div>
-</div>
-
-<div style="background:var(--sf2);border-radius:8px;padding:12px;margin-bottom:10px">
-<div style="font-size:11px;font-weight:700;color:var(--og);margin-bottom:8px">② Vector Change (전-후)</div>
-<div style="display:flex;justify-content:center;gap:6px">
-<svg width="120" height="170" viewBox="0 0 120 170"><circle cx="60" cy="26" r="14" fill="none" stroke="#4a5568" stroke-width="1.5"/><line x1="60" y1="40" x2="60" y2="50" stroke="#4a5568" stroke-width="1.5"/><ellipse cx="60" cy="108" rx="38" ry="56" fill="rgba(74,85,104,.06)" stroke="#4a5568" stroke-width="1.5"/><rect x="40" y="74" width="26" height="12" rx="3" fill="#f97316"/><text x="53" y="84" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">ANT</text><text x="60" y="167" text-anchor="middle" fill="#7a8ba8" font-size="9">전면</text></svg>
-<svg width="120" height="170" viewBox="0 0 120 170"><circle cx="60" cy="26" r="14" fill="none" stroke="#4a5568" stroke-width="1.5"/><line x1="60" y1="40" x2="60" y2="50" stroke="#4a5568" stroke-width="1.5"/><ellipse cx="60" cy="108" rx="38" ry="56" fill="rgba(74,85,104,.06)" stroke="#4a5568" stroke-width="1.5" stroke-dasharray="5,3"/><rect x="47" y="82" width="26" height="12" rx="3" fill="#3b82f6"/><text x="60" y="92" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">POST</text><text x="60" y="167" text-anchor="middle" fill="#7a8ba8" font-size="9">후면</text></svg>
-</div>
-<div style="display:flex;justify-content:center;gap:14px;font-size:9px;color:var(--txd);margin-top:4px"><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#f97316;border-radius:2px;display:inline-block"></span>흉골 좌측 (전면)</span><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#3b82f6;border-radius:2px;display:inline-block"></span>좌측 견갑골 하 (후면)</span></div>
+<div style="display:flex;justify-content:center;gap:14px;font-size:9px;color:var(--txd);margin-top:4px"><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#ef4444;border-radius:2px;display:inline-block"></span>R. subclavicular</span><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#3b82f6;border-radius:2px;display:inline-block"></span>L. mid-axillary</span></div>
 </div>
 
 <div style="background:var(--sf2);border-radius:8px;padding:12px;margin-bottom:10px">
-<div style="font-size:11px;font-weight:700;color:var(--rd);margin-bottom:8px">③ DSED — 제세동기 2대</div>
+<div style="font-size:11px;font-weight:700;color:var(--og);margin-bottom:8px">② Vector Change (Anterior-Posterior)</div>
 <div style="display:flex;justify-content:center;gap:6px">
-<svg width="120" height="170" viewBox="0 0 120 170"><circle cx="60" cy="26" r="14" fill="none" stroke="#4a5568" stroke-width="1.5"/><line x1="60" y1="40" x2="60" y2="50" stroke="#4a5568" stroke-width="1.5"/><ellipse cx="60" cy="108" rx="38" ry="56" fill="rgba(74,85,104,.06)" stroke="#4a5568" stroke-width="1.5"/><rect x="28" y="58" width="20" height="10" rx="2" fill="#ef4444"/><text x="38" y="67" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">1R</text><rect x="92" y="96" width="10" height="20" rx="2" fill="#ef4444"/><text x="97" y="110" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">1L</text><rect x="60" y="74" width="20" height="10" rx="2" fill="#22c55e"/><text x="70" y="83" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">2A</text><text x="60" y="167" text-anchor="middle" fill="#7a8ba8" font-size="9">전면</text></svg>
-<svg width="120" height="170" viewBox="0 0 120 170"><circle cx="60" cy="26" r="14" fill="none" stroke="#4a5568" stroke-width="1.5"/><line x1="60" y1="40" x2="60" y2="50" stroke="#4a5568" stroke-width="1.5"/><ellipse cx="60" cy="108" rx="38" ry="56" fill="rgba(74,85,104,.06)" stroke="#4a5568" stroke-width="1.5" stroke-dasharray="5,3"/><rect x="47" y="82" width="26" height="12" rx="3" fill="#22c55e"/><text x="60" y="92" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">2P</text><text x="60" y="167" text-anchor="middle" fill="#7a8ba8" font-size="9">후면</text></svg>
+<svg width="120" height="170" viewBox="0 0 120 170"><circle cx="60" cy="26" r="14" fill="none" stroke="#4a5568" stroke-width="1.5"/><line x1="60" y1="40" x2="60" y2="50" stroke="#4a5568" stroke-width="1.5"/><ellipse cx="60" cy="108" rx="38" ry="56" fill="rgba(74,85,104,.06)" stroke="#4a5568" stroke-width="1.5"/><rect x="40" y="74" width="26" height="12" rx="3" fill="#f97316"/><text x="53" y="84" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">ANT</text><text x="60" y="167" text-anchor="middle" fill="#7a8ba8" font-size="9">Front</text></svg>
+<svg width="120" height="170" viewBox="0 0 120 170"><circle cx="60" cy="26" r="14" fill="none" stroke="#4a5568" stroke-width="1.5"/><line x1="60" y1="40" x2="60" y2="50" stroke="#4a5568" stroke-width="1.5"/><ellipse cx="60" cy="108" rx="38" ry="56" fill="rgba(74,85,104,.06)" stroke="#4a5568" stroke-width="1.5" stroke-dasharray="5,3"/><rect x="47" y="82" width="26" height="12" rx="3" fill="#3b82f6"/><text x="60" y="92" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">POST</text><text x="60" y="167" text-anchor="middle" fill="#7a8ba8" font-size="9">Back</text></svg>
 </div>
-<div style="display:flex;justify-content:center;gap:14px;font-size:9px;color:var(--txd);margin-top:4px"><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#ef4444;border-radius:2px;display:inline-block"></span>1번기 (전-측)</span><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#22c55e;border-radius:2px;display:inline-block"></span>2번기 (전-후)</span></div>
+<div style="display:flex;justify-content:center;gap:14px;font-size:9px;color:var(--txd);margin-top:4px"><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#f97316;border-radius:2px;display:inline-block"></span>L. parasternal (ant.)</span><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#3b82f6;border-radius:2px;display:inline-block"></span>L. infrascapular (post.)</span></div>
+</div>
+
+<div style="background:var(--sf2);border-radius:8px;padding:12px;margin-bottom:10px">
+<div style="font-size:11px;font-weight:700;color:var(--rd);margin-bottom:8px">③ DSED — Two Defibrillators</div>
+<div style="display:flex;justify-content:center;gap:6px">
+<svg width="120" height="170" viewBox="0 0 120 170"><circle cx="60" cy="26" r="14" fill="none" stroke="#4a5568" stroke-width="1.5"/><line x1="60" y1="40" x2="60" y2="50" stroke="#4a5568" stroke-width="1.5"/><ellipse cx="60" cy="108" rx="38" ry="56" fill="rgba(74,85,104,.06)" stroke="#4a5568" stroke-width="1.5"/><rect x="28" y="58" width="20" height="10" rx="2" fill="#ef4444"/><text x="38" y="67" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">1R</text><rect x="92" y="96" width="10" height="20" rx="2" fill="#ef4444"/><text x="97" y="110" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">1L</text><rect x="60" y="74" width="20" height="10" rx="2" fill="#22c55e"/><text x="70" y="83" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">2A</text><text x="60" y="167" text-anchor="middle" fill="#7a8ba8" font-size="9">Front</text></svg>
+<svg width="120" height="170" viewBox="0 0 120 170"><circle cx="60" cy="26" r="14" fill="none" stroke="#4a5568" stroke-width="1.5"/><line x1="60" y1="40" x2="60" y2="50" stroke="#4a5568" stroke-width="1.5"/><ellipse cx="60" cy="108" rx="38" ry="56" fill="rgba(74,85,104,.06)" stroke="#4a5568" stroke-width="1.5" stroke-dasharray="5,3"/><rect x="47" y="82" width="26" height="12" rx="3" fill="#22c55e"/><text x="60" y="92" text-anchor="middle" fill="#fff" font-size="7" font-weight="700">2P</text><text x="60" y="167" text-anchor="middle" fill="#7a8ba8" font-size="9">Back</text></svg>
+</div>
+<div style="display:flex;justify-content:center;gap:14px;font-size:9px;color:var(--txd);margin-top:4px"><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#ef4444;border-radius:2px;display:inline-block"></span>Defib 1 (AL)</span><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#22c55e;border-radius:2px;display:inline-block"></span>Defib 2 (AP)</span></div>
 </div>
 
 <div class="dsed-note">
-📌 <b>DSED 순서</b>: 1번기 충전 → 2번기 충전 → 1번기 shock → <b>즉시</b> 2번기 shock<br>
-📌 <b>Vector Change</b>: 전-측 → 전-후로 패드 위치 변경하여 전류 벡터를 바꿈
+📌 <b>DSED sequence</b>: Charge 1 → Charge 2 → Shock 1 → <b>immediately</b> Shock 2<br>
+📌 <b>Vector Change</b>: Reposition pads from AL to AP to alter current vector
 </div>
 
-<button class="btn" style="width:100%;margin-top:10px" onclick="closeDSED()">닫기</button>
+<button class="btn" style="width:100%;margin-top:10px" onclick="closeDSED()">Close</button>
 </div>
 </div>
 
@@ -314,43 +313,43 @@ let e=gE();
 document.getElementById('master-timer').textContent=fT(e);
 let cr=e-cs,rem=Math.max(0,60000-cr);
 document.getElementById('cpr-cycle-timer').textContent=fT(rem);
-if(rem<=10000&&rem>0&&!sa){sa=true;document.getElementById('cpr-swap-alert').style.display='block';alert2();addLog('⚠️ 10초후 '+(cyc%2===0?'리듬체크+':'')+'교대','cpr')}
-if(rem<=0){document.getElementById('cpr-cycle-timer').textContent='0:00';let isRC=cyc%2===0;document.getElementById('cpr-cycle-label').textContent=isRC?'⏰ 리듬체크+교대!':'⏰ 교대!';document.getElementById('cpr-swap-alert').style.display='block';document.getElementById('cpr-swap-alert').textContent=isRC?'🔄 리듬체크+교대!':'🔄 교대!'}
+if(rem<=10000&&rem>0&&!sa){sa=true;document.getElementById('cpr-swap-alert').style.display='block';alert2();addLog('⚠️ 10s '+(cyc%2===0?'Rhythm Check+':'')+'Swap','cpr')}
+if(rem<=0){document.getElementById('cpr-cycle-timer').textContent='0:00';let isRC=cyc%2===0;document.getElementById('cpr-cycle-label').textContent=isRC?'⏰ Rhythm Check+SWAP!':'⏰ 교대!';document.getElementById('cpr-swap-alert').style.display='block';document.getElementById('cpr-swap-alert').textContent=isRC?'🔄 리듬체크+교대!':'🔄 교대!'}
 if(epiT!==null){let d=e-epiT;document.getElementById('epi-t').textContent=fT(d);document.getElementById('epi-t').className='drug-timer'+(d>=180000?' due':'')}
 }
 
-function startCode(){on=true;t0=Date.now();po=0;paused=false;startTime=new Date();document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);cs=0;iAudio();addLog('🚨 CODE START','alert');addLog('CPR 시작 — Cycle 1','cpr')}
-function togglePause(){if(!on)return;let b=document.getElementById('pause-btn');if(paused){paused=false;t0=Date.now();b.textContent='⏸';b.classList.remove('running');addLog('▶️ 재개','alert')}else{paused=true;po=gE();b.textContent='▶';b.classList.add('running');addLog('⏸ 일시정지','alert')}}
-function endCode(){if(!confirm('ACLS 세션을 종료하시겠습니까?'))return;addLog('🏁 CODE END — 총 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
+function startCode(){on=true;t0=Date.now();po=0;paused=false;startTime=new Date();document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);cs=0;iAudio();addLog('🚨 CODE START','alert');addLog('CPR Start — Cycle 1','cpr')}
+function togglePause(){if(!on)return;let b=document.getElementById('pause-btn');if(paused){paused=false;t0=Date.now();b.textContent='⏸';b.classList.remove('running');addLog('▶️ Resume','alert')}else{paused=true;po=gE();b.textContent='▶';b.classList.add('running');addLog('⏸ Pause','alert')}}
+function endCode(){if(!confirm('End ACLS session?'))return;addLog('🏁 CODE END — 총 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
 
-function rhythmCheckSwap(){let isRC=cyc%2===0;cyc++;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='다음 '+(cyc%2===0?'리듬체크+':'')+'교대까지';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');if(isRC){addLog('⏸ 리듬체크 — Cycle '+cyc,'rhythm');addLog('🔄 교대 — Cycle '+cyc,'cpr')}else{addLog('🔄 교대 — Cycle '+cyc,'cpr')}btn.textContent=cyc%2===0?'⏸ 리듬체크 + 교대':'🔄 교대'}
+function rhythmCheckSwap(){let isRC=cyc%2===0;cyc++;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='다음 '+(cyc%2===0?'Rhythm Check+':'')+'교대까지';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');if(isRC){addLog('⏸ Rhythm Check — Cycle '+cyc,'rhythm');addLog('🔄 Swap — Cycle '+cyc,'cpr')}else{addLog('🔄 교대 — Cycle '+cyc,'cpr')}btn.textContent=cyc%2===0?'⏸ Rhythm Check + Swap':'🔄 Swap'}
 
 function toggleMetro(){metOn?stopM():startM()}
 function startM(){metOn=true;document.getElementById('metro-btn').classList.add('active');metI=setInterval(()=>{if(!paused){click();let d=document.getElementById('metronome-dot');d.classList.add('beat');setTimeout(()=>d.classList.remove('beat'),80)}},60000/110)}
 function stopM(){metOn=false;document.getElementById('metro-btn').classList.remove('active');clearInterval(metI)}
 
 function setAW(t,btn){document.querySelectorAll('.aw-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');let s=document.getElementById('airway-status'),r=document.getElementById('airway-ratio'),tip=document.getElementById('airway-tip'),bg=document.getElementById('aw-badge');
-if(t==='bvm'){bg.textContent='BVM';s.textContent='30 : 2';r.textContent='압박 30회 : 환기 2회';tip.textContent='💡 30:2 비율. 과환기 주의. 가슴 상승 확인.';addLog('Airway: BVM (30:2)','airway')}
-else if(t==='lma'){bg.textContent='LMA';s.textContent='연속압박';r.textContent='6초마다 1회 환기';tip.textContent='💡 LMA 삽입. 연속압박+6초당 1배깅.';addLog('Airway: LMA → 연속압박','airway')}
-else{bg.textContent='ETT';s.textContent='연속압박';r.textContent='6초마다 1회 환기';tip.textContent='💡 삽관완료. 연속압박+ETCO2 확인.';addLog('Airway: 삽관완료','airway')}}
+if(t==='bvm'){bg.textContent='BVM';s.textContent='30 : 2';r.textContent='30 compressions : 2 ventilations';tip.textContent='💡 30:2 ratio. Avoid hyperventilation. Confirm chest rise.';addLog('Airway: BVM (30:2)','airway')}
+else if(t==='lma'){bg.textContent='LMA';s.textContent='Continuous CPR';r.textContent='Ventilate every 6 seconds';tip.textContent='💡 LMA inserted. Continuous CPR + ventilate q6s.';addLog('Airway: LMA → Continuous CPR','airway')}
+else{bg.textContent='ETT';s.textContent='Continuous CPR';r.textContent='Ventilate every 6 seconds';tip.textContent='💡 ETT placed. Continuous CPR + check ETCO2.';addLog('Airway: ETT placed','airway')}}
 
 const RD={vf:{n:'VF',sh:true},pvt:{n:'Pulseless VT',sh:true},pea:{n:'PEA',sh:false},asystole:{n:'Asystole',sh:false},rosc:{n:'ROSC ✓',sh:false},other:{n:'기타',sh:false}};
 let curRhythm=null;
-function setRH(t,btn){document.querySelectorAll('.rh-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');let d=RD[t];curRhythm=t;document.getElementById('rh-badge').textContent=d.sh?'SHOCKABLE':'NON-SHOCK';document.getElementById('rh-badge').style.background=d.sh?'var(--rd)':'var(--txd)';addLog('리듬: '+d.n,'rhythm');updateEpiGuide();updateAmioGuide();if(t==='rosc'){addLog('🎉 ROSC!','alert');stopM();openROSC()}}
-function updateEpiGuide(){let g=document.getElementById('epi-guide');if(!curRhythm||curRhythm==='rosc'||curRhythm==='other'){g.classList.remove('show');return}g.classList.add('show');g.style.animation='none';let sh=RD[curRhythm].sh;let sinceEpi=epiT!==null?gE()-epiT:null;let epiDue=sinceEpi!==null&&sinceEpi>=180000;if(sh){if(sc<2){g.className='show';g.id='epi-guide';g.textContent='⚡ Shockable: Epi는 2번째 shock 후 투여'}else if(epiT===null){g.className='show';g.id='epi-guide';g.textContent='💉 Epi 투여 가능 — 지금 투여';g.style.animation='pulse .8s ease-in-out infinite alternate'}else if(epiDue){g.className='show';g.id='epi-guide';g.textContent='💉 Epi 재투여 시점 ('+Math.floor(sinceEpi/60000)+'분 경과)';g.style.animation='pulse .8s ease-in-out infinite alternate'}else{g.className='show ok';g.id='epi-guide';g.textContent='✅ Epi 투여됨 — 다음 투여 '+(3-Math.floor(sinceEpi/60000))+'분 후'}}else{if(epiT===null){g.className='show';g.id='epi-guide';g.textContent='🚨 Non-shockable: Epi 즉시 투여!';g.style.animation='pulse .8s ease-in-out infinite alternate'}else if(epiDue){g.className='show';g.id='epi-guide';g.textContent='💉 Epi 재투여 시점 ('+Math.floor(sinceEpi/60000)+'분 경과)';g.style.animation='pulse .8s ease-in-out infinite alternate'}else{g.className='show ok';g.id='epi-guide';g.textContent='✅ Epi 투여됨 (#'+ec+') — 다음 투여 '+(3-Math.floor(sinceEpi/60000))+'분 후'}}}
+function setRH(t,btn){document.querySelectorAll('.rh-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');let d=RD[t];curRhythm=t;document.getElementById('rh-badge').textContent=d.sh?'SHOCKABLE':'NON-SHOCK';document.getElementById('rh-badge').style.background=d.sh?'var(--rd)':'var(--txd)';addLog('Rhythm: '+d.n,'rhythm');updateEpiGuide();updateAmioGuide();if(t==='rosc'){addLog('🎉 ROSC!','alert');stopM();openROSC()}}
+function updateEpiGuide(){let g=document.getElementById('epi-guide');if(!curRhythm||curRhythm==='rosc'||curRhythm==='other'){g.classList.remove('show');return}g.classList.add('show');g.style.animation='none';let sh=RD[curRhythm].sh;let sinceEpi=epiT!==null?gE()-epiT:null;let epiDue=sinceEpi!==null&&sinceEpi>=180000;if(sh){if(sc<2){g.className='show';g.id='epi-guide';g.textContent='⚡ Shockable: Epi는 2번째 shock 후 투여'}else if(epiT===null){g.className='show';g.id='epi-guide';g.textContent='💉 Epi 투여 가능 — 지금 투여';g.style.animation='pulse .8s ease-in-out infinite alternate'}else if(epiDue){g.className='show';g.id='epi-guide';g.textContent='💉 Epi 재투여 시점 ('+Math.floor(sinceEpi/60000)+'분 경과)';g.style.animation='pulse .8s ease-in-out infinite alternate'}else{g.className='show ok';g.id='epi-guide';g.textContent='✅ Epi 투여됨 — 다음 투여 '+(3-Math.floor(sinceEpi/60000))+'분 후'}}else{if(epiT===null){g.className='show';g.id='epi-guide';g.textContent='🚨 Non-shockable: Epi immediately 투여!';g.style.animation='pulse .8s ease-in-out infinite alternate'}else if(epiDue){g.className='show';g.id='epi-guide';g.textContent='💉 Epi 재투여 시점 ('+Math.floor(sinceEpi/60000)+'분 경과)';g.style.animation='pulse .8s ease-in-out infinite alternate'}else{g.className='show ok';g.id='epi-guide';g.textContent='✅ Epi 투여됨 (#'+ec+') — 다음 투여 '+(3-Math.floor(sinceEpi/60000))+'분 후'}}}
 
 function openROSC(){document.getElementById('rosc-modal').classList.add('show')}
 function closeROSC(){document.getElementById('rosc-modal').classList.remove('show')}
-function tROSC(el){el.classList.toggle('checked');if(el.classList.contains('checked'))addLog('✅ [ROSC] '+el.dataset.c+' 확인','alert')}
+function tROSC(el){el.classList.toggle('checked');if(el.classList.contains('checked'))addLog('✅ [ROSC] '+el.dataset.c+' 'Checked','alert')}
 function openDSED(){document.getElementById('dsed-modal').classList.add('show')}
 function closeDSED(){document.getElementById('dsed-modal').classList.remove('show')}
 
 const SHOCK_J=[200,200,200,200,200];
 function shockJ(){return SHOCK_J[Math.min(sc,SHOCK_J.length-1)]}
-function shock(){let j=shockJ();sc++;document.getElementById('shock-count').textContent=sc+'회';document.getElementById('shock-btn').textContent='⚡ '+shockJ()+'J';addLog('⚡ 제세동 #'+sc+' ('+j+'J)','rhythm');alert2();updateEpiGuide();updateAmioGuide();
-if(sc>=3){document.getElementById('refractory-tip').classList.add('show');if(sc===3)addLog('💡 Refractory VF — 패드위치변경/DSED 고려','alert')}
+function shock(){let j=shockJ();sc++;document.getElementById('shock-count').textContent=sc+'x';document.getElementById('shock-btn').textContent='⚡ '+shockJ()+'J';addLog('⚡ Defib #'+sc+' ('+j+'J)','rhythm');alert2();updateEpiGuide();updateAmioGuide();
+if(sc>=3){document.getElementById('refractory-tip').classList.add('show');if(sc===3)addLog('💡 Refractory VF — Consider pad repo/DSED','alert')}
 // shock = 리듬체크 완료. 홀수 사이클로 리셋 → 다음 리듬체크는 2사이클 후
-cyc=cyc%2===0?cyc+1:cyc+2;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='다음 교대까지';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');btn.textContent='🔄 교대';addLog('🔄 교대 — Cycle '+cyc,'cpr')}
+cyc=cyc%2===0?cyc+1:cyc+2;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='Next swap';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');btn.textContent='🔄 Swap';addLog('🔄 Swap — Cycle '+cyc,'cpr')}
 
 function giveEpi(){ec++;epiT=gE();addLog('💉 Epi 1mg IV (#'+ec+')','drug');updateEpiGuide()}
 function giveAmio(){ac++;let dose=ac===1?'300mg':'150mg';addLog('💉 Amio '+dose+' IV (#'+ac+')','drug');updateAmioGuide()}
@@ -360,22 +359,22 @@ if(ac>=2){l.textContent='✅ 최대용량 완료 (300+150mg)';return}
 if(!curRhythm||!RD[curRhythm].sh){l.textContent=ac===0?'300mg → 150mg (Shockable용)':'✅ 300mg 투여됨';return}
 if(ac===0){if(sc<3){l.textContent='300mg — 3rd shock 후 투여'}else{l.textContent='💉 300mg 투여 가능!'}}
 else if(ac===1){if(sc<5){l.textContent='150mg — 5th shock 후 투여'}else{l.textContent='💉 150mg 투여 가능!'}}}
-function giveOther(){openInput('💉 기타 약물','약물/용량 입력...',function(d){addLog('💉 '+d,'drug')})}
+function giveOther(){openInput('💉 Other medication','Drug/dose...',function(d){addLog('💉 '+d,'drug')})}
 
 let inputCb=null;
 function openInput(label,ph,cb){inputCb=cb;document.getElementById('input-label').textContent=label;let f=document.getElementById('input-field');f.value='';f.placeholder=ph;document.getElementById('input-modal').classList.add('show');setTimeout(()=>f.focus(),50)}
 function closeInput(){document.getElementById('input-modal').classList.remove('show');inputCb=null}
 function submitInput(){let d=document.getElementById('input-field').value.trim();let cb=inputCb;closeInput();if(d&&cb)cb(d)}
 
-function openMemo(){openInput('📝 메모','메모 내용 입력...',function(d){addLog('📝 '+d,'alert')})}
+function openMemo(){openInput('📝 메모','Enter memo...',function(d){addLog('📝 '+d,'alert')})}
 
 function openHT(){document.getElementById('ht-modal').classList.add('show')}
 function closeHT(){document.getElementById('ht-modal').classList.remove('show')}
-function tHT(el){el.classList.toggle('checked');if(el.classList.contains('checked'))addLog('✅ '+el.dataset.c+' 확인','drug')}
+function tHT(el){el.classList.toggle('checked');if(el.classList.contains('checked'))addLog('✅ '+el.dataset.c+' 'Checked','drug')}
 
 function addLog(msg,type){let t=fT(gE());logs.push({t,msg,type,ts:new Date().toISOString()});let c=document.getElementById('log-entries'),d=document.createElement('div');d.className='log-entry '+type;d.innerHTML='<span class="log-time">'+t+'</span><span class="log-msg">'+msg+'</span>';c.prepend(d)}
 
-function exportLog(){let st=startTime?startTime.toLocaleString('ko-KR'):'N/A';let t='2025 ACLS Code Log\n시작: '+st+'\n내보내기: '+new Date().toLocaleString('ko-KR')+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\n총시간: '+fT(gE())+'\n제세동: '+sc+'회\nEpi: '+ec+'회\nAmio: '+ac+'회\n';let b=new Blob(['\uFEFF'+t],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='acls_'+new Date().toISOString().slice(0,10)+'.txt';a.click()}
+function exportLog(){let st=startTime?startTime.toLocaleString('ko-KR'):'N/A';let t='2025 ACLS Code Log\nStart: '+st+'\nExport: '+new Date().toLocaleString('ko-KR')+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\nDuration: '+fT(gE())+'\n제세동: '+sc+'x\nEpi: '+ec+'x\nAmio: '+ac+'x\n';let b=new Blob(['\uFEFF'+t],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='acls_'+new Date().toISOString().slice(0,10)+'.txt';a.click()}
 
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'))}
 </script>
