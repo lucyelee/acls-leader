@@ -1,4 +1,4 @@
-const CACHE = 'acls-v8';
+const CACHE = 'acls-v9';
 const FILES = ['./', './index.html', './en.html', './icon.png', './manifest.json'];
 
 self.addEventListener('install', e => {
