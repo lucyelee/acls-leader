@@ -144,6 +144,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <div id="not-started">
 <h2>2025 ACLS</h2>
 <p>팀 리더 대시보드</p>
+<div style="margin:12px 0;display:flex;align-items:center;gap:8px;justify-content:center">
+<label style="font-size:12px;color:var(--txd)">CPR 경과시간</label>
+<input id="offset-min" type="number" min="0" max="60" value="0" style="width:48px;padding:6px 8px;border:1px solid var(--bd);border-radius:6px;background:var(--sf2);color:var(--tx);font-family:inherit;font-size:16px;font-weight:700;text-align:center;-webkit-appearance:none" inputmode="numeric">
+<span style="font-size:12px;color:var(--txd)">분</span>
+</div>
 <button id="begin-btn" onclick="startCode()">시작</button>
 <p style="font-size:9px;color:var(--txd);margin-top:20px;line-height:1.6">Based on AHA ACLS 2025 Guidelines<br>교육 및 시뮬레이션 목적으로 제작되었습니다</p>
 <a href="en.html" style="font-size:10px;color:var(--ac);margin-top:8px;display:inline-block">English →</a>
@@ -339,7 +344,7 @@ if(rem<=0){document.getElementById('cpr-cycle-timer').textContent='0:00';let isR
 if(epiT!==null){let d=e-epiT;document.getElementById('epi-t').textContent=fT(d);document.getElementById('epi-t').className='drug-timer'+(d>=180000?' due':'')}
 }
 
-function startCode(){on=true;t0=Date.now();po=0;paused=false;startTime=new Date();document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);cs=0;iAudio();addLog('🚨 ACLS 시작','alert');addLog('CPR 시작 — Cycle 1','cpr')}
+function startCode(){let offsetMin=parseInt(document.getElementById('offset-min').value)||0;on=true;t0=Date.now()-offsetMin*60000;po=0;paused=false;startTime=new Date(Date.now()-offsetMin*60000);document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);cs=0;iAudio();if(offsetMin>0){addLog('🚨 ACLS 시작 ('+offsetMin+'분 경과)','alert')}else{addLog('🚨 ACLS 시작','alert')};addLog('CPR 시작 — Cycle 1','cpr')}
 function togglePause(){if(!on)return;let b=document.getElementById('pause-btn');if(paused){paused=false;t0=Date.now();b.textContent='⏸';b.classList.remove('running');addLog('▶️ 재개','alert')}else{paused=true;po=gE();b.textContent='▶';b.classList.add('running');addLog('⏸ 일시정지','alert')}}
 function endCode(){if(!confirm('ACLS 세션을 종료하시겠습니까?'))return;addLog('🏁 CODE END — 총 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
 
