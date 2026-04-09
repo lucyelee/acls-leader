@@ -399,7 +399,7 @@ let lastLogText='';
 function buildLogText(){let st=startTime?startTime.toLocaleString('en-US'):'N/A';let t='2025 ACLS Code Log\nStart: '+st+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\nDuration: '+fT(gE())+'\nDefib: '+sc+'x\nEpi: '+ec+'x\nAmio: '+ac+'x';return t}
 function exportLog(){lastLogText=buildLogText();document.getElementById('export-text').textContent=lastLogText;document.getElementById('export-modal').classList.add('show')}
 function closeExport(){document.getElementById('export-modal').classList.remove('show')}
-function shareLog(){if(navigator.share){navigator.share({title:'ACLS Log',text:lastLogText}).catch(()=>{})}else{let b=new Blob(['\uFEFF'+lastLogText],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='acls_'+new Date().toISOString().slice(0,10)+'.txt';a.click()}closeExport()}
+function shareLog(){let b=new Blob(['\uFEFF'+lastLogText],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='acls_'+new Date().toISOString().slice(0,10)+'.txt';a.click();closeExport()}
 
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'))}
 </script>
