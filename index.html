@@ -391,6 +391,7 @@ function giveOther(){openInput('💉 기타 약물','약물/용량 입력...',fu
 let inputCb=null;
 function openInput(label,ph,cb){inputCb=cb;document.getElementById('input-label').textContent=label;let f=document.getElementById('input-field');f.value='';f.placeholder=ph;document.getElementById('input-modal').classList.add('show');setTimeout(()=>f.focus(),50)}
 function closeInput(){document.getElementById('input-modal').classList.remove('show');inputCb=null}
+function submitInput(){let d=document.getElementById('input-field').value.trim();let cb=inputCb;closeInput();if(d&&cb)cb(d)}
 
 function openMemo(){openInput('📝 메모','메모 내용 입력...',function(d){addLog('📝 '+d,'alert')})}
 
