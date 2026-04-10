@@ -173,8 +173,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <div id="cpr-cycle-label">Next rhythm check</div>
 <div id="metronome-indicator"><div id="metronome-dot"></div><span id="metronome-label">110 BPM</span></div>
 <div id="cpr-controls">
-<button class="btn-s" style="background:var(--rd);border-color:var(--rd);color:#fff" onclick="rhythmCheckSwap()">⏸ Rhythm Check + Swap</button>
-<button class="btn-s" id="metro-btn" onclick="toggleMetro()">🔊 Metronome</button>
+<button class="btn-s" style="background:var(--rd);border-color:var(--rd);color:#fff" onclick="rhythmCheckSwap()">⏸ RC + Swap</button>
+<button class="btn-s" id="metro-btn" onclick="toggleMetro()">🔊 Metro</button>
 </div>
 </div>
 
@@ -348,7 +348,7 @@ function startCode(){let offsetMin=parseInt(document.getElementById('offset-min'
 function togglePause(){if(!on)return;let b=document.getElementById('pause-btn');if(paused){paused=false;t0=Date.now();b.textContent='⏸';b.classList.remove('running');addLog('▶️ Resume','alert')}else{paused=true;po=gE();b.textContent='▶';b.classList.add('running');addLog('⏸ Pause','alert')}}
 function endCode(){if(!confirm('End ACLS session?'))return;addLog('🏁 CODE END — 총 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
 
-function rhythmCheckSwap(){let isRC=cyc%2===0;cyc++;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='Next '+(cyc%2===0?'Rhythm Check + ':'')+'Swap';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');if(isRC){addLog('⏸ Rhythm Check — Cycle '+cyc,'rhythm');addLog('🔄 Swap — Cycle '+cyc,'cpr')}else{addLog('🔄 Swap — Cycle '+cyc,'cpr')}btn.textContent=cyc%2===0?'⏸ Rhythm Check + Swap':'🔄 Swap'}
+function rhythmCheckSwap(){let isRC=cyc%2===0;cyc++;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='Next '+(cyc%2===0?'RC + ':'')+'Swap';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');if(isRC){addLog('⏸ Rhythm Check — Cycle '+cyc,'rhythm');addLog('🔄 Swap — Cycle '+cyc,'cpr')}else{addLog('🔄 Swap — Cycle '+cyc,'cpr')}btn.textContent=cyc%2===0?'⏸ RC + Swap':'🔄 Swap'}
 
 function toggleMetro(){metOn?stopM():startM()}
 function startM(){if(!actx)iAudio();metOn=true;document.getElementById('metro-btn').classList.add('active');let comp=actx.createDynamicsCompressor();comp.threshold.value=-3;comp.knee.value=0;comp.ratio.value=20;comp.attack.value=0;comp.release.value=0.05;comp.connect(actx.destination);let ws=actx.createWaveShaper(),curve=new Float32Array(256);for(let i=0;i<256;i++){let x=i*2/255-1;curve[i]=x<0?-1:1}ws.curve=curve;ws.connect(comp);let interval=60/110,nextT=actx.currentTime;let freqs=[600,1000,1400,2000];function sched(){if(nextT<actx.currentTime-0.5)nextT=actx.currentTime;while(nextT<actx.currentTime+0.1){freqs.forEach(f=>{let o=actx.createOscillator(),g=actx.createGain();o.type='square';o.connect(g);g.connect(ws);o.frequency.value=f;g.gain.value=1.0;o.start(nextT);g.gain.exponentialRampToValueAtTime(0.001,nextT+0.1);o.stop(nextT+0.1)});nextT+=interval}if(metOn)metI=setTimeout(sched,25)}sched();setInterval(()=>{if(metOn&&!paused){let d=document.getElementById('metronome-dot');d.classList.add('beat');setTimeout(()=>d.classList.remove('beat'),80)}},60000/110)}
