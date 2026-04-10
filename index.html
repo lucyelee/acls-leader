@@ -373,9 +373,7 @@ function closeDSED(){document.getElementById('dsed-modal').classList.remove('sho
 const SHOCK_J=[200,200,200,200,200];
 function shockJ(){return SHOCK_J[Math.min(sc,SHOCK_J.length-1)]}
 function shock(){let j=shockJ();sc++;document.getElementById('shock-count').textContent=sc+'회';document.getElementById('shock-btn').textContent='⚡ '+shockJ()+'J';addLog('⚡ 제세동 #'+sc+' ('+j+'J)','rhythm');alert2();updateEpiGuide();updateAmioGuide();
-if(sc>=3){document.getElementById('refractory-tip').classList.add('show');if(sc===3)addLog('💡 Refractory VF — 패드위치변경/DSED 고려','alert')}
-// shock = 리듬체크 완료. 홀수 사이클로 리셋 → 다음 리듬체크는 2사이클 후
-cyc=cyc%2===0?cyc+1:cyc+2;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='다음 교대까지';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');btn.textContent='🔄 교대';addLog('🔄 교대 — Cycle '+cyc,'cpr')}
+if(sc>=3){document.getElementById('refractory-tip').classList.add('show');if(sc===3)addLog('💡 Refractory VF — 패드위치변경/DSED 고려','alert')}}
 
 function giveEpi(){ec++;epiT=gE();addLog('💉 Epi 1mg IV (#'+ec+')','drug');updateEpiGuide()}
 function giveAmio(){ac++;let dose=ac===1?'300mg':'150mg';addLog('💉 Amio '+dose+' IV (#'+ac+')','drug');updateAmioGuide()}
