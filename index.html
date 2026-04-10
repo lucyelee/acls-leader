@@ -342,7 +342,7 @@ let e=gE();
 document.getElementById('master-timer').textContent=fT(e);
 let cr=e-cs,rem=Math.max(0,60000-cr);
 document.getElementById('cpr-cycle-timer').textContent=fT(rem);
-if(rem<=10000&&rem>0&&!sa){sa=true;document.getElementById('cpr-swap-alert').style.display='block';alert2();addLog('⚠️ 10초후 '+(cyc%2===0?'리듬체크+':'')+'교대','cpr')}
+if(rem<=10000&&rem>0&&!sa){sa=true;let isRC=cyc%2===0;document.getElementById('cpr-swap-alert').style.display='block';document.getElementById('cpr-swap-alert').textContent=isRC?'🔄 리듬체크+교대!':'🔄 교대!';alert2();addLog('⚠️ 10초후 '+(isRC?'리듬체크+':'')+'교대','cpr')}
 if(rem<=0){document.getElementById('cpr-cycle-timer').textContent='0:00';let isRC=cyc%2===0;document.getElementById('cpr-cycle-label').textContent=isRC?'⏰ 리듬체크+교대!':'⏰ 교대!';document.getElementById('cpr-swap-alert').style.display='block';document.getElementById('cpr-swap-alert').textContent=isRC?'🔄 리듬체크+교대!':'🔄 교대!'}
 if(epiT!==null){let d=e-epiT;document.getElementById('epi-t').textContent=fT(d);document.getElementById('epi-t').className='drug-timer'+(d>=180000?' due':'')}
 }
