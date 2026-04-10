@@ -344,7 +344,7 @@ if(rem<=0){document.getElementById('cpr-cycle-timer').textContent='0:00';let isR
 if(epiT!==null){let d=e-epiT;document.getElementById('epi-t').textContent=fT(d);document.getElementById('epi-t').className='drug-timer'+(d>=180000?' due':'')}
 }
 
-function startCode(){let offsetMin=parseInt(document.getElementById('offset-min').value)||0;on=true;t0=Date.now()-offsetMin*60000;po=0;paused=false;startTime=new Date(Date.now()-offsetMin*60000);document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);cs=0;iAudio();if(offsetMin>0){addLog('🚨 ACLS Start ('+offsetMin+'min elapsed)','alert')}else{addLog('🚨 ACLS Start','alert')};addLog('CPR Start — Cycle 1','cpr')}
+function startCode(){let offsetMin=parseInt(document.getElementById('offset-min').value)||0;on=true;t0=Date.now()-offsetMin*60000;po=0;paused=false;startTime=new Date(Date.now()-offsetMin*60000);document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);iAudio();cs=gE();if(offsetMin>0){addLog('🚨 ACLS Start ('+offsetMin+'min elapsed)','alert')}else{addLog('🚨 ACLS Start','alert')};addLog('CPR Start — Cycle 1','cpr')}
 function togglePause(){if(!on)return;let b=document.getElementById('pause-btn');if(paused){paused=false;t0=Date.now();b.textContent='⏸';b.classList.remove('running');addLog('▶️ Resume','alert')}else{paused=true;po=gE();b.textContent='▶';b.classList.add('running');addLog('⏸ Pause','alert')}}
 function endCode(){if(!confirm('End ACLS session?'))return;addLog('🏁 CODE END — 총 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
 
