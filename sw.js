@@ -1,4 +1,4 @@
-const CACHE = 'acls-v15';
+const CACHE = 'acls-v16';
 const FILES = ['./', './index.html', './en.html', './icon.png', './manifest.json'];
 
 self.addEventListener('install', e => {
@@ -15,6 +15,10 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
+    fetch(e.request).then(r => {
+      let clone = r.clone();
+      caches.open(CACHE).then(c => c.put(e.request, clone));
+      return r;
+    }).catch(() => caches.match(e.request))
   );
 });
