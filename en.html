@@ -206,7 +206,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <span id="shock-count">0</span>
 <button class="btn-s" id="shock-btn" style="flex:0;padding:5px 12px;background:var(--yw);border-color:var(--yw);color:#000" onclick="shock()">⚡ 200J</button>
 </div>
-<div id="refractory-tip" onclick="openDSED()">💡 Refractory VF: Consider pad repositioning or DSED ▶</div>
+<div id="refractory-tip" onclick="openDSED()">💡 Refractory VF: Consider pad repositioning or DSED (KACPR) ▶</div>
 </div>
 
 <div class="panel" id="drugs-panel">
@@ -216,7 +216,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <div class="drug-row"><div><div class="drug-name">Epinephrine</div><div class="drug-dose">1mg IV q3-5min</div></div><div class="drug-timer" id="epi-t">—</div><button class="drug-give" onclick="giveEpi()">Give</button></div>
 <div class="drug-row"><div><div class="drug-name">Amiodarone</div><div class="drug-dose" id="amio-lbl">300mg → 150mg</div></div><div class="drug-timer" id="amio-t">—</div><button class="drug-give" id="amio-btn" onclick="giveAmio()">Give</button></div>
 <div class="drug-row"><div><div class="drug-name">Other</div><div class="drug-dose">Atropine 등</div></div><div class="drug-timer">—</div><button class="drug-give" onclick="giveOther()">Log</button></div>
-<div id="ht-btn" onclick="openHT()">⚠️ H5 T4 Reversible Causes Checklist</div>
+<div id="ht-btn" onclick="openHT()">⚠️ 5H 5T Reversible Causes Checklist</div>
 </div>
 </div>
 </div>
@@ -247,21 +247,22 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 
 <div id="ht-modal" onclick="if(event.target===this)closeHT()">
 <div id="ht-content">
-<h2>H5 T4 Reversible Causes</h2>
-<h3 style="color:var(--rd)">H's</h3>
+<h2>5H 5T Reversible Causes</h2>
+<h3 style="color:var(--rd)">H's (5)</h3>
 <div class="ht-grid">
 <div class="ht-item" onclick="tHT(this)" data-c="Hypovolemia"><div class="ht-item-name">Hypovolemia</div><div class="ht-item-how">US (IVC), fluids/blood</div></div>
 <div class="ht-item" onclick="tHT(this)" data-c="Hypoxia"><div class="ht-item-name">Hypoxia</div><div class="ht-item-how">SpO2, breath sounds, airway</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="H+ Acidosis"><div class="ht-item-name">H⁺ Acidosis</div><div class="ht-item-how">ABGA (pH, HCO3)</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="Hypo/HyperK"><div class="ht-item-name">Hypo/HyperK</div><div class="ht-item-how">ABGA(K+), ECG</div></div>
 <div class="ht-item" onclick="tHT(this)" data-c="Hypothermia"><div class="ht-item-name">Hypothermia</div><div class="ht-item-how">Core temperature</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="H+ Acidosis"><div class="ht-item-name">H⁺ ions (Acidosis)</div><div class="ht-item-how">ABGA (pH, HCO3)</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Hypo/Hyperkalemia"><div class="ht-item-name">Hypo/Hyperkalemia</div><div class="ht-item-how">ABGA(K+), ECG</div></div>
 </div>
-<h3 style="color:var(--yw)">T's</h3>
+<h3 style="color:var(--yw)">T's (5)</h3>
 <div class="ht-grid">
-<div class="ht-item" onclick="tHT(this)" data-c="Tension Pneumothorax"><div class="ht-item-name">Tension Pneumo</div><div class="ht-item-how">Auscultation, US, needle decompression</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="Tamponade"><div class="ht-item-name">Tamponade</div><div class="ht-item-how">US, pericardiocentesis</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Tension Pneumothorax"><div class="ht-item-name">Tension pneumothorax</div><div class="ht-item-how">Auscultation, US, needle decompression</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Tamponade (cardiac)"><div class="ht-item-name">Tamponade (cardiac)</div><div class="ht-item-how">US, pericardiocentesis</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Thrombosis (MI)"><div class="ht-item-name">Thrombosis (MI)</div><div class="ht-item-how">12-lead ECG, consider PCI</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Thrombosis (PE)"><div class="ht-item-name">Thrombosis (PE)</div><div class="ht-item-how">US (RV), CT angio</div></div>
 <div class="ht-item" onclick="tHT(this)" data-c="Toxins"><div class="ht-item-name">Toxins</div><div class="ht-item-how">History, pupils, antidote</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="Thrombosis"><div class="ht-item-name">Thrombosis</div><div class="ht-item-how">12-lead ECG, 초음파(RV)</div></div>
 </div>
 <button class="btn" style="width:100%;margin-top:8px" onclick="closeHT()">Close</button>
 </div>
@@ -272,11 +273,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <h2>✅ ROSC — Post-Cardiac Arrest Care</h2>
 <div class="ht-grid">
 <div class="ht-item" onclick="tROSC(this)" data-c="12-lead ECG"><div class="ht-item-name">12-lead ECG</div><div class="ht-item-how">STEMI → Consider PCI</div></div>
-<div class="ht-item" onclick="tROSC(this)" data-c="SpO2 92-98%"><div class="ht-item-name">SpO2 92-98%</div><div class="ht-item-how">Avoid hyperoxia, titrate FiO2</div></div>
+<div class="ht-item" onclick="tROSC(this)" data-c="SpO2 target"><div class="ht-item-name">SpO2 90-98%</div><div class="ht-item-how">Avoid hyperoxia, titrate FiO2 (KACPR 94-98%)</div></div>
 <div class="ht-item" onclick="tROSC(this)" data-c="MAP > 65"><div class="ht-item-name">MAP > 65 mmHg</div><div class="ht-item-how">Fluids/vasopressors, SBP>90</div></div>
-<div class="ht-item" onclick="tROSC(this)" data-c="TTM"><div class="ht-item-name">TTM</div><div class="ht-item-how">32-36℃ target, prevent fever</div></div>
+<div class="ht-item" onclick="tROSC(this)" data-c="TTM"><div class="ht-item-name">TTM 32-37.5℃</div><div class="ht-item-how">Prevent fever (KACPR 33-37.5℃)</div></div>
 <div class="ht-item" onclick="tROSC(this)" data-c="ABG"><div class="ht-item-name">ABG</div><div class="ht-item-how">pH, K+, Lactate</div></div>
-<div class="ht-item" onclick="tROSC(this)" data-c="Treat Cause"><div class="ht-item-name">Treat Cause</div><div class="ht-item-how">H5T4-based definitive Tx</div></div>
+<div class="ht-item" onclick="tROSC(this)" data-c="Treat Cause"><div class="ht-item-name">Treat Cause</div><div class="ht-item-how">5H5T-based definitive Tx</div></div>
 </div>
 <button class="btn" style="width:100%;margin-top:8px" onclick="closeROSC()">Close</button>
 </div>
@@ -315,7 +316,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 
 <div class="dsed-note">
 📌 <b>DSED sequence</b>: Charge 1 → Charge 2 → Shock 1 → <b>immediately</b> Shock 2<br>
-📌 <b>Vector Change</b>: Reposition pads from AL to AP to alter current vector
+📌 <b>Vector Change</b>: Reposition pads from AL to AP to alter current vector<br>
+⚠️ Consider for experienced providers (KACPR)
 </div>
 
 <button class="btn" style="width:100%;margin-top:10px" onclick="closeDSED()">Close</button>
@@ -349,7 +351,7 @@ if(epiT!==null){let d=e-epiT;document.getElementById('epi-t').textContent=fT(d);
 
 function startCode(){let offsetMin=parseInt(document.getElementById('offset-min').value)||0;on=true;t0=Date.now()-offsetMin*60000;po=0;paused=false;startTime=new Date(Date.now()-offsetMin*60000);document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);iAudio();cs=gE();if(offsetMin>0){addLog('🚨 ACLS Start ('+offsetMin+'min elapsed)','alert')}else{addLog('🚨 ACLS Start','alert')};addLog('CPR Start — Cycle 1','cpr')}
 function togglePause(){if(!on)return;let b=document.getElementById('pause-btn');if(paused){paused=false;t0=Date.now();b.textContent='⏸';b.classList.remove('running');addLog('▶️ Resume','alert')}else{po=gE();paused=true;b.textContent='▶';b.classList.add('running');addLog('⏸ Pause','alert')}}
-function endCode(){if(!confirm('End ACLS session?'))return;addLog('🏁 CODE END — 총 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
+function endCode(){if(!confirm('End ACLS session?'))return;addLog('🏁 CODE END — Total CPR Time '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
 
 function rhythmCheckSwap(){let isRC=cyc%2===0;cyc++;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='Next '+(cyc%2===0?'RC + ':'')+'Swap';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');if(isRC){addLog('⏸ Rhythm Check — Cycle '+cyc,'rhythm');addLog('🔄 Swap — Cycle '+cyc,'cpr')}else{addLog('🔄 Swap — Cycle '+cyc,'cpr')}btn.textContent=cyc%2===0?'⏸ RC + Swap':'🔄 Swap'}
 
@@ -358,9 +360,9 @@ function startM(){if(!actx)iAudio();metOn=true;document.getElementById('metro-bt
 function stopM(){metOn=false;document.getElementById('metro-btn').classList.remove('active');clearTimeout(metI)}
 
 function setAW(t,btn){document.querySelectorAll('.aw-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');let s=document.getElementById('airway-status'),r=document.getElementById('airway-ratio'),tip=document.getElementById('airway-tip'),bg=document.getElementById('aw-badge');
-if(t==='bvm'){bg.textContent='BVM';s.textContent='30 : 2';r.textContent='30 compressions : 2 ventilations';tip.textContent='💡 30:2 ratio. Avoid hyperventilation. Confirm chest rise.';addLog('Airway: BVM (30:2)','airway')}
-else if(t==='lma'){bg.textContent='LMA';s.textContent='Continuous CPR';r.textContent='Ventilate every 6 seconds';tip.textContent='💡 LMA inserted. Continuous CPR + ventilate q6s.';addLog('Airway: LMA → Continuous CPR','airway')}
-else{bg.textContent='ETT';s.textContent='Continuous CPR';r.textContent='Ventilate every 6 seconds';tip.textContent='💡 ETT placed. Continuous CPR + check ETCO2.';addLog('Airway: ETT placed','airway')}}
+if(t==='bvm'){bg.textContent='BVM';s.textContent='30 : 2';r.textContent='30 compressions : 2 ventilations';tip.textContent='💡 BVM: 30:2 ratio. Avoid hyperventilation. Confirm chest rise.';addLog('Airway: BVM (30:2)','airway')}
+else if(t==='lma'){bg.textContent='LMA';s.textContent='Continuous CPR';r.textContent='Ventilate every 6 seconds';tip.textContent='💡 LMA placed: Continuous CPR + ventilate q6s';addLog('Airway: LMA placed → Continuous CPR + q6s ventilation','airway')}
+else{bg.textContent='ETT';s.textContent='Continuous CPR';r.textContent='Ventilate q6s + ETCO2';tip.textContent='💡 ETT placed: Continuous CPR + ventilate q6s + confirm ETCO2';addLog('Airway: ETT placed → Continuous CPR + q6s ventilation + ETCO2','airway')}}
 
 const RD={vf:{n:'VF',sh:true},pvt:{n:'Pulseless VT',sh:true},pea:{n:'PEA',sh:false},asystole:{n:'Asystole',sh:false},rosc:{n:'ROSC ✓',sh:false},other:{n:'Other',sh:false}};
 let curRhythm=null;
@@ -376,7 +378,7 @@ function closeDSED(){document.getElementById('dsed-modal').classList.remove('sho
 const SHOCK_J=[200,200,200,200,200];
 function shockJ(){return SHOCK_J[Math.min(sc,SHOCK_J.length-1)]}
 function shock(){let j=shockJ();sc++;document.getElementById('shock-count').textContent=sc+'x';document.getElementById('shock-btn').textContent='⚡ '+shockJ()+'J';addLog('⚡ Defib #'+sc+' ('+j+'J)','rhythm');alert2();updateEpiGuide();updateAmioGuide();
-if(sc>=3){document.getElementById('refractory-tip').classList.add('show');if(sc===3)addLog('💡 Refractory VF — Consider pad repo/DSED','alert')}}
+if(sc>=3){document.getElementById('refractory-tip').classList.add('show');if(sc===3)addLog('💡 Refractory VF — Consider pad repo/DSED (KACPR)','alert')}}
 
 function giveEpi(){ec++;epiT=gE();addLog('💉 Epi 1mg IV (#'+ec+')','drug');updateEpiGuide()}
 function giveAmio(){ac++;let dose=ac===1?'300mg':'150mg';addLog('💉 Amio '+dose+' IV (#'+ac+')','drug');updateAmioGuide()}
@@ -402,7 +404,7 @@ function tHT(el){el.classList.toggle('checked');if(el.classList.contains('checke
 function addLog(msg,type){let t=fT(gE());logs.push({t,msg,type,ts:new Date().toISOString()});let c=document.getElementById('log-entries'),d=document.createElement('div');d.className='log-entry '+type;d.innerHTML='<span class="log-time">'+t+'</span><span class="log-msg">'+msg+'</span>';c.prepend(d)}
 
 let lastLogText='';
-function buildLogText(){let st=startTime?startTime.toLocaleString('en-US'):'N/A';let t='2025 ACLS Code Log\nStart: '+st+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\nDuration: '+fT(gE())+'\nDefib: '+sc+'x\nEpi: '+ec+'x\nAmio: '+ac+'x';return t}
+function buildLogText(){let st=startTime?startTime.toLocaleString('en-US'):'N/A';let t='2025 ACLS Code Log\nStart: '+st+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\nTotal CPR Time: '+fT(gE())+'\nDefib: '+sc+'x\nEpi: '+ec+'x\nAmio: '+ac+'x';return t}
 function exportLog(){lastLogText=buildLogText();document.getElementById('export-text').textContent=lastLogText;document.getElementById('export-modal').classList.add('show')}
 function closeExport(){document.getElementById('export-modal').classList.remove('show')}
 function copyLog(){navigator.clipboard.writeText(lastLogText).then(()=>{let btn=document.querySelector('#export-btns .share');btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',1500)}).catch(()=>{let ta=document.createElement('textarea');ta.value=lastLogText;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);let btn=document.querySelector('#export-btns .share');btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',1500)})}

@@ -206,7 +206,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <span id="shock-count">0회</span>
 <button class="btn-s" id="shock-btn" style="flex:0;padding:5px 12px;background:var(--yw);border-color:var(--yw);color:#000" onclick="shock()">⚡ 200J</button>
 </div>
-<div id="refractory-tip" onclick="openDSED()">💡 Refractory VF: 패드 위치 변경 또는 DSED 고려 ▶</div>
+<div id="refractory-tip" onclick="openDSED()">💡 Refractory VF: 패드 위치 변경 또는 DSED 고려 (대한심폐소생협회) ▶</div>
 </div>
 
 <div class="panel" id="drugs-panel">
@@ -216,7 +216,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <div class="drug-row"><div><div class="drug-name">Epinephrine</div><div class="drug-dose">1mg IV q3-5분</div></div><div class="drug-timer" id="epi-t">—</div><button class="drug-give" onclick="giveEpi()">투여</button></div>
 <div class="drug-row"><div><div class="drug-name">Amiodarone</div><div class="drug-dose" id="amio-lbl">300mg → 150mg</div></div><div class="drug-timer" id="amio-t">—</div><button class="drug-give" id="amio-btn" onclick="giveAmio()">투여</button></div>
 <div class="drug-row"><div><div class="drug-name">기타</div><div class="drug-dose">Atropine 등</div></div><div class="drug-timer">—</div><button class="drug-give" onclick="giveOther()">기록</button></div>
-<div id="ht-btn" onclick="openHT()">⚠️ H5 T4 가역적 원인 체크리스트 열기</div>
+<div id="ht-btn" onclick="openHT()">⚠️ 5H 5T 가역적 원인 체크리스트 열기</div>
 </div>
 </div>
 </div>
@@ -247,21 +247,22 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 
 <div id="ht-modal" onclick="if(event.target===this)closeHT()">
 <div id="ht-content">
-<h2>H5 T4 가역적 원인</h2>
-<h3 style="color:var(--rd)">H's</h3>
+<h2>5H 5T 가역적 원인</h2>
+<h3 style="color:var(--rd)">H's (5)</h3>
 <div class="ht-grid">
 <div class="ht-item" onclick="tHT(this)" data-c="Hypovolemia"><div class="ht-item-name">Hypovolemia</div><div class="ht-item-how">초음파(IVC), 수액/수혈</div></div>
 <div class="ht-item" onclick="tHT(this)" data-c="Hypoxia"><div class="ht-item-name">Hypoxia</div><div class="ht-item-how">SpO2, 호흡음, 기도확인</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="H+ Acidosis"><div class="ht-item-name">H⁺ Acidosis</div><div class="ht-item-how">ABGA (pH, HCO3)</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="Hypo/HyperK"><div class="ht-item-name">Hypo/HyperK</div><div class="ht-item-how">ABGA(K+), ECG</div></div>
 <div class="ht-item" onclick="tHT(this)" data-c="Hypothermia"><div class="ht-item-name">Hypothermia</div><div class="ht-item-how">체온 측정</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="H+ Acidosis"><div class="ht-item-name">H⁺ ions (Acidosis)</div><div class="ht-item-how">ABGA (pH, HCO3)</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Hypo/Hyperkalemia"><div class="ht-item-name">Hypo/Hyperkalemia</div><div class="ht-item-how">ABGA(K+), ECG</div></div>
 </div>
-<h3 style="color:var(--yw)">T's</h3>
+<h3 style="color:var(--yw)">T's (5)</h3>
 <div class="ht-grid">
-<div class="ht-item" onclick="tHT(this)" data-c="Tension Pneumothorax"><div class="ht-item-name">Tension Pneumo</div><div class="ht-item-how">청진, 초음파, 바늘감압</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="Tamponade"><div class="ht-item-name">Tamponade</div><div class="ht-item-how">초음파, 심낭천자</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Tension Pneumothorax"><div class="ht-item-name">Tension pneumothorax</div><div class="ht-item-how">청진, 초음파, 바늘감압</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Tamponade (cardiac)"><div class="ht-item-name">Tamponade (cardiac)</div><div class="ht-item-how">초음파, 심낭천자</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Thrombosis (MI)"><div class="ht-item-name">Thrombosis (MI)</div><div class="ht-item-how">12-lead ECG, PCI 고려</div></div>
+<div class="ht-item" onclick="tHT(this)" data-c="Thrombosis (PE)"><div class="ht-item-name">Thrombosis (PE)</div><div class="ht-item-how">초음파(RV), CT angio</div></div>
 <div class="ht-item" onclick="tHT(this)" data-c="Toxins"><div class="ht-item-name">Toxins</div><div class="ht-item-how">병력, 동공, 해독제</div></div>
-<div class="ht-item" onclick="tHT(this)" data-c="Thrombosis"><div class="ht-item-name">Thrombosis</div><div class="ht-item-how">12-lead ECG, 초음파(RV)</div></div>
 </div>
 <button class="btn" style="width:100%;margin-top:8px" onclick="closeHT()">닫기</button>
 </div>
@@ -272,11 +273,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 <h2>✅ ROSC — Post-Cardiac Arrest Care</h2>
 <div class="ht-grid">
 <div class="ht-item" onclick="tROSC(this)" data-c="12-lead ECG"><div class="ht-item-name">12-lead ECG</div><div class="ht-item-how">STEMI → PCI 고려</div></div>
-<div class="ht-item" onclick="tROSC(this)" data-c="SpO2 92-98%"><div class="ht-item-name">SpO2 92-98%</div><div class="ht-item-how">과산소 회피, FiO2 조절</div></div>
+<div class="ht-item" onclick="tROSC(this)" data-c="SpO2 target"><div class="ht-item-name">SpO2 90-98%</div><div class="ht-item-how">과산소 회피, FiO2 조절 (대한심폐소생협회 94-98%)</div></div>
 <div class="ht-item" onclick="tROSC(this)" data-c="MAP > 65"><div class="ht-item-name">MAP > 65 mmHg</div><div class="ht-item-how">수액/승압제, SBP>90</div></div>
-<div class="ht-item" onclick="tROSC(this)" data-c="TTM"><div class="ht-item-name">TTM (체온관리)</div><div class="ht-item-how">32-36℃ 목표, 열 방지</div></div>
+<div class="ht-item" onclick="tROSC(this)" data-c="TTM"><div class="ht-item-name">TTM 32-37.5℃</div><div class="ht-item-how">열 방지 (대한심폐소생협회 33-37.5℃)</div></div>
 <div class="ht-item" onclick="tROSC(this)" data-c="ABGA"><div class="ht-item-name">ABGA</div><div class="ht-item-how">pH, K+, Lactate 확인</div></div>
-<div class="ht-item" onclick="tROSC(this)" data-c="원인 치료"><div class="ht-item-name">원인 치료</div><div class="ht-item-how">H5T4 기반 근본 치료</div></div>
+<div class="ht-item" onclick="tROSC(this)" data-c="원인 치료"><div class="ht-item-name">원인 치료</div><div class="ht-item-how">5H5T 기반 근본 치료</div></div>
 </div>
 <button class="btn" style="width:100%;margin-top:8px" onclick="closeROSC()">닫기</button>
 </div>
@@ -315,7 +316,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 
 <div class="dsed-note">
 📌 <b>DSED 순서</b>: 1번기 충전 → 2번기 충전 → 1번기 shock → <b>즉시</b> 2번기 shock<br>
-📌 <b>Vector Change</b>: 전-측 → 전-후로 패드 위치 변경하여 전류 벡터를 바꿈
+📌 <b>Vector Change</b>: 전-측 → 전-후로 패드 위치 변경하여 전류 벡터를 바꿈<br>
+⚠️ 숙련된 의료진의 경우 고려 (대한심폐소생협회)
 </div>
 
 <button class="btn" style="width:100%;margin-top:10px" onclick="closeDSED()">닫기</button>
@@ -349,7 +351,7 @@ if(epiT!==null){let d=e-epiT;document.getElementById('epi-t').textContent=fT(d);
 
 function startCode(){let offsetMin=parseInt(document.getElementById('offset-min').value)||0;on=true;t0=Date.now()-offsetMin*60000;po=0;paused=false;startTime=new Date(Date.now()-offsetMin*60000);document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);iAudio();cs=gE();if(offsetMin>0){addLog('🚨 ACLS 시작 ('+offsetMin+'분 경과)','alert')}else{addLog('🚨 ACLS 시작','alert')};addLog('CPR 시작 — Cycle 1','cpr')}
 function togglePause(){if(!on)return;let b=document.getElementById('pause-btn');if(paused){paused=false;t0=Date.now();b.textContent='⏸';b.classList.remove('running');addLog('▶️ 재개','alert')}else{po=gE();paused=true;b.textContent='▶';b.classList.add('running');addLog('⏸ 일시정지','alert')}}
-function endCode(){if(!confirm('ACLS 세션을 종료하시겠습니까?'))return;addLog('🏁 CODE END — 총 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
+function endCode(){if(!confirm('ACLS 세션을 종료하시겠습니까?'))return;addLog('🏁 CODE END — 총 CPR 시간 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
 
 function rhythmCheckSwap(){let isRC=cyc%2===0;cyc++;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='다음 '+(cyc%2===0?'리듬체크+':'')+'교대까지';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');if(isRC){addLog('⏸ 리듬체크 — Cycle '+cyc,'rhythm');addLog('🔄 교대 — Cycle '+cyc,'cpr')}else{addLog('🔄 교대 — Cycle '+cyc,'cpr')}btn.textContent=cyc%2===0?'⏸ 리듬체크 + 교대':'🔄 교대'}
 
@@ -358,9 +360,9 @@ function startM(){if(!actx)iAudio();metOn=true;document.getElementById('metro-bt
 function stopM(){metOn=false;document.getElementById('metro-btn').classList.remove('active');clearTimeout(metI)}
 
 function setAW(t,btn){document.querySelectorAll('.aw-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');let s=document.getElementById('airway-status'),r=document.getElementById('airway-ratio'),tip=document.getElementById('airway-tip'),bg=document.getElementById('aw-badge');
-if(t==='bvm'){bg.textContent='BVM';s.textContent='30 : 2';r.textContent='압박 30회 : 환기 2회';tip.textContent='💡 30:2 비율. 과환기 주의. 가슴 상승 확인.';addLog('Airway: BVM (30:2)','airway')}
-else if(t==='lma'){bg.textContent='LMA';s.textContent='연속압박';r.textContent='6초마다 1회 환기';tip.textContent='💡 LMA 삽입. 연속압박+6초당 1배깅.';addLog('Airway: LMA → 연속압박','airway')}
-else{bg.textContent='ETT';s.textContent='연속압박';r.textContent='6초마다 1회 환기';tip.textContent='💡 삽관완료. 연속압박+ETCO2 확인.';addLog('Airway: 삽관완료','airway')}}
+if(t==='bvm'){bg.textContent='BVM';s.textContent='30 : 2';r.textContent='압박 30회 : 환기 2회';tip.textContent='💡 BVM: 30:2 비율. 과환기 주의. 가슴 상승 확인.';addLog('Airway: BVM (30:2)','airway')}
+else if(t==='lma'){bg.textContent='LMA';s.textContent='연속압박';r.textContent='6초에 1회 환기';tip.textContent='💡 LMA 삽관 완료: 연속압박 + 6초에 1회 환기';addLog('Airway: LMA 삽관 완료 → 연속압박 + 6초 1회 환기','airway')}
+else{bg.textContent='ETT';s.textContent='연속압박';r.textContent='6초에 1회 환기 + ETCO2';tip.textContent='💡 삽관 완료: 연속압박 + 6초에 1회 환기 + ETCO2 확인';addLog('Airway: 삽관 완료 → 연속압박 + 6초 1회 환기 + ETCO2','airway')}}
 
 const RD={vf:{n:'VF',sh:true},pvt:{n:'Pulseless VT',sh:true},pea:{n:'PEA',sh:false},asystole:{n:'Asystole',sh:false},rosc:{n:'ROSC ✓',sh:false},other:{n:'기타',sh:false}};
 let curRhythm=null;
@@ -376,7 +378,7 @@ function closeDSED(){document.getElementById('dsed-modal').classList.remove('sho
 const SHOCK_J=[200,200,200,200,200];
 function shockJ(){return SHOCK_J[Math.min(sc,SHOCK_J.length-1)]}
 function shock(){let j=shockJ();sc++;document.getElementById('shock-count').textContent=sc+'회';document.getElementById('shock-btn').textContent='⚡ '+shockJ()+'J';addLog('⚡ 제세동 #'+sc+' ('+j+'J)','rhythm');alert2();updateEpiGuide();updateAmioGuide();
-if(sc>=3){document.getElementById('refractory-tip').classList.add('show');if(sc===3)addLog('💡 Refractory VF — 패드위치변경/DSED 고려','alert')}}
+if(sc>=3){document.getElementById('refractory-tip').classList.add('show');if(sc===3)addLog('💡 Refractory VF — 패드위치변경/DSED 고려 (대한심폐소생협회)','alert')}}
 
 function giveEpi(){ec++;epiT=gE();addLog('💉 Epi 1mg IV (#'+ec+')','drug');updateEpiGuide()}
 function giveAmio(){ac++;let dose=ac===1?'300mg':'150mg';addLog('💉 Amio '+dose+' IV (#'+ac+')','drug');updateAmioGuide()}
@@ -402,7 +404,7 @@ function tHT(el){el.classList.toggle('checked');if(el.classList.contains('checke
 function addLog(msg,type){let t=fT(gE());logs.push({t,msg,type,ts:new Date().toISOString()});let c=document.getElementById('log-entries'),d=document.createElement('div');d.className='log-entry '+type;d.innerHTML='<span class="log-time">'+t+'</span><span class="log-msg">'+msg+'</span>';c.prepend(d)}
 
 let lastLogText='';
-function buildLogText(){let st=startTime?startTime.toLocaleString('ko-KR'):'N/A';let t='2025 ACLS Code Log\n시작: '+st+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\n총시간: '+fT(gE())+'\n제세동: '+sc+'회\nEpi: '+ec+'회\nAmio: '+ac+'회';return t}
+function buildLogText(){let st=startTime?startTime.toLocaleString('ko-KR'):'N/A';let t='2025 ACLS Code Log\n시작: '+st+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\n총 CPR 시간: '+fT(gE())+'\n제세동: '+sc+'회\nEpi: '+ec+'회\nAmio: '+ac+'회';return t}
 function exportLog(){lastLogText=buildLogText();document.getElementById('export-text').textContent=lastLogText;document.getElementById('export-modal').classList.add('show')}
 function closeExport(){document.getElementById('export-modal').classList.remove('show')}
 function copyLog(){navigator.clipboard.writeText(lastLogText).then(()=>{let btn=document.querySelector('#export-btns .share');btn.textContent='✅ 복사됨!';setTimeout(()=>btn.textContent='📋 복사',1500)}).catch(()=>{let ta=document.createElement('textarea');ta.value=lastLogText;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);let btn=document.querySelector('#export-btns .share');btn.textContent='✅ 복사됨!';setTimeout(()=>btn.textContent='📋 복사',1500)})}

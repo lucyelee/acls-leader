@@ -18,7 +18,7 @@ Add to your iPhone/Android home screen and it works offline as a standalone app.
 - ⚡ **Rhythm** — VF, pVT, PEA, Asystole, ROSC + defibrillation counter
 - 💊 **Drugs** — Epinephrine (q3-5min timer), Amiodarone (300→150mg) with smart dosing guide
 - 🔥 **Refractory VF** — DSED pad placement guide with anatomical diagrams
-- ⚠️ **H5T4** — Reversible causes checklist / 가역적 원인 체크리스트
+- ⚠️ **5H5T** — Reversible causes checklist / 가역적 원인 체크리스트
 - ✅ **ROSC** — Post-cardiac arrest care checklist
 - 📋 **Event Log** — Auto-records all events + text export for debriefing
 
