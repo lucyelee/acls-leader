@@ -157,7 +157,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 
 <div id="top-bar">
 <h1>2025 ACLS</h1>
-<div id="master-timer">00:00</div>
+<div style="text-align:center"><div id="master-timer">00:00</div><div style="font-size:9px;color:var(--txd);font-weight:600;margin-top:-2px">CPR 경과시간</div></div>
 <div id="top-controls">
 <button class="btn" onclick="openMemo()">메모</button>
 <button class="btn btn-start" id="pause-btn" onclick="togglePause()">⏸</button>
@@ -351,7 +351,7 @@ if(epiT!==null){let d=e-epiT;document.getElementById('epi-t').textContent=fT(d);
 
 function startCode(){let offsetMin=parseInt(document.getElementById('offset-min').value)||0;on=true;t0=Date.now()-offsetMin*60000;po=0;paused=false;startTime=new Date(Date.now()-offsetMin*60000);document.getElementById('not-started').style.display='none';mi=setInterval(tick,200);iAudio();cs=gE();if(offsetMin>0){addLog('🚨 ACLS 시작 ('+offsetMin+'분 경과)','alert')}else{addLog('🚨 ACLS 시작','alert')};addLog('CPR 시작 — Cycle 1','cpr')}
 function togglePause(){if(!on)return;let b=document.getElementById('pause-btn');if(paused){paused=false;t0=Date.now();b.textContent='⏸';b.classList.remove('running');addLog('▶️ 재개','alert')}else{po=gE();paused=true;b.textContent='▶';b.classList.add('running');addLog('⏸ 일시정지','alert')}}
-function endCode(){if(!confirm('ACLS 세션을 종료하시겠습니까?'))return;addLog('🏁 CODE END — 총 CPR 시간 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
+function endCode(){if(!confirm('ACLS 세션을 종료하시겠습니까?'))return;addLog('🏁 ACLS 종료 — 총 CPR 시간 '+fT(gE()),'alert');clearInterval(mi);stopM();on=false}
 
 function rhythmCheckSwap(){let isRC=cyc%2===0;cyc++;cs=gE();sa=false;document.getElementById('cpr-swap-alert').style.display='none';document.getElementById('cpr-cycle-label').textContent='다음 '+(cyc%2===0?'리듬체크+':'')+'교대까지';document.getElementById('cpr-badge').textContent='Cycle '+cyc;let btn=document.querySelector('#cpr-controls .btn-s');if(isRC){addLog('⏸ 리듬체크 — Cycle '+cyc,'rhythm');addLog('🔄 교대 — Cycle '+cyc,'cpr')}else{addLog('🔄 교대 — Cycle '+cyc,'cpr')}btn.textContent=cyc%2===0?'⏸ 리듬체크 + 교대':'🔄 교대'}
 
