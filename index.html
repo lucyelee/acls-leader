@@ -157,7 +157,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 
 <div id="top-bar">
 <h1>2025 ACLS</h1>
-<div style="text-align:center"><div id="master-timer">00:00</div><div style="font-size:9px;color:var(--txd);font-weight:600;margin-top:-2px">CPR 경과시간</div></div>
+<div style="text-align:center"><div id="master-timer">00:00</div><div style="font-size:11px;color:var(--txd);font-weight:600;margin-top:-2px">CPR 경과시간</div></div>
 <div id="top-controls">
 <button class="btn" onclick="openMemo()">메모</button>
 <button class="btn btn-start" id="pause-btn" onclick="togglePause()">⏸</button>
@@ -315,9 +315,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 </div>
 
 <div class="dsed-note">
-📌 <b>DSED 순서</b>: 1번기 충전 → 2번기 충전 → 1번기 shock → <b>즉시</b> 2번기 shock<br>
 📌 <b>Vector Change</b>: 전-측 → 전-후로 패드 위치 변경하여 전류 벡터를 바꿈<br>
-⚠️ 숙련된 의료진의 경우 고려 (대한심폐소생협회)
+📌 <b>DSED 순서</b>: 단일 시행자가 순서대로 1번기 shock → <b>즉시</b> 2번기 shock<br>
+⚠️ 3회 이상 제세동 후 VF/pVT 지속 시, 훈련된 의료종사자가 벡터변화제세동(약한 권고) 또는 이중연속제세동(약한 권고)을 시도할 수 있음 (대한심폐소생협회)
 </div>
 
 <button class="btn" style="width:100%;margin-top:10px" onclick="closeDSED()">닫기</button>

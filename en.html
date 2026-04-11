@@ -157,7 +157,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 
 <div id="top-bar">
 <h1>2025 ACLS</h1>
-<div style="text-align:center"><div id="master-timer">00:00</div><div style="font-size:9px;color:var(--txd);font-weight:600;margin-top:-2px">CPR Elapsed</div></div>
+<div style="text-align:center"><div id="master-timer">00:00</div><div style="font-size:11px;color:var(--txd);font-weight:600;margin-top:-2px">CPR Elapsed</div></div>
 <div id="top-controls">
 <button class="btn" onclick="openMemo()">Memo</button>
 <button class="btn btn-start" id="pause-btn" onclick="togglePause()">⏸</button>
@@ -315,9 +315,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 </div>
 
 <div class="dsed-note">
-📌 <b>DSED sequence</b>: Charge 1 → Charge 2 → Shock 1 → <b>immediately</b> Shock 2<br>
 📌 <b>Vector Change</b>: Reposition pads from AL to AP to alter current vector<br>
-⚠️ Consider for experienced providers (KACPR)
+📌 <b>DSED sequence</b>: Single operator fires Defib 1 → <b>immediately</b> Defib 2 sequentially<br>
+⚠️ After ≥3 shocks with persistent VF/pVT, trained providers may attempt vector-change defibrillation (weak rec.) or DSED (weak rec.) (KACPR)
 </div>
 
 <button class="btn" style="width:100%;margin-top:10px" onclick="closeDSED()">Close</button>
