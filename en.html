@@ -228,7 +228,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 
 <div id="export-modal" onclick="if(event.target===this)closeExport()">
 <div id="export-box">
-<h3>📋 ACLS Log</h3>
+<h3>📋 ACLS CPR Log</h3>
 <div id="export-text"></div>
 <div id="export-btns">
 <button onclick="closeExport()">Close</button>
@@ -404,7 +404,7 @@ function tHT(el){el.classList.toggle('checked');if(el.classList.contains('checke
 function addLog(msg,type){let t=fT(gE());logs.push({t,msg,type,ts:new Date().toISOString()});let c=document.getElementById('log-entries'),d=document.createElement('div');d.className='log-entry '+type;d.innerHTML='<span class="log-time">'+t+'</span><span class="log-msg">'+msg+'</span>';c.prepend(d)}
 
 let lastLogText='';
-function buildLogText(){let st=startTime?startTime.toLocaleString('en-US'):'N/A';let t='2025 ACLS Code Log\nStart: '+st+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\nTotal CPR Time: '+fT(gE())+'\nDefib: '+sc+'x\nEpi: '+ec+'x\nAmio: '+ac+'x';return t}
+function buildLogText(){let st=startTime?startTime.toLocaleString('en-US'):'N/A';let t='2025 ACLS CPR Log\nStart: '+st+'\n'+'='.repeat(40)+'\n\n';logs.forEach(e=>{t+='['+e.t+'] '+e.msg+'\n'});t+='\n'+'='.repeat(40)+'\nTotal CPR Time: '+fT(gE())+'\nDefib: '+sc+'x\nEpi: '+ec+'x\nAmio: '+ac+'x';return t}
 function exportLog(){lastLogText=buildLogText();document.getElementById('export-text').textContent=lastLogText;document.getElementById('export-modal').classList.add('show')}
 function closeExport(){document.getElementById('export-modal').classList.remove('show')}
 function copyLog(){navigator.clipboard.writeText(lastLogText).then(()=>{let btn=document.querySelector('#export-btns .share');btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',1500)}).catch(()=>{let ta=document.createElement('textarea');ta.value=lastLogText;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);let btn=document.querySelector('#export-btns .share');btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',1500)})}
